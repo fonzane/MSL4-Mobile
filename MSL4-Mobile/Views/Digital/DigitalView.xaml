@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MSL4_Mobile.Views.DigitalView"
+             x:Name="page"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             Title="Digitale Kanäle">
+
+    <VerticalStackLayout Spacing="20" Margin="0,20,0,0" BindingContext="{x:Reference page}">
+
+        <ListView ItemsSource="{Binding digitalInputs}" SelectionMode="None" HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
+            <ListView.Header>
+                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
+                    <Label Text="Eingänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
+                    <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
+                    <Label Text="Typ" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
+                    <Label Text="Status" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
+                    <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="services:DigitalInput">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
+                            <Label Text="{Binding pName}" Grid.Column="0"/>
+                            <Label Text="{Binding pDigitalType}" Grid.Column="1"/>
+                            <HorizontalStackLayout Grid.Column="2">
+                                <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
+                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
+                                <Label Text="{Binding pValueText}" />
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView ItemsSource="{Binding digitalOutputs}" SelectionMode="None" HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
+            <ListView.Header>
+                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
+                    <Label Text="Ausgänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
+                    <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
+                    <Label Text="Beschreibung" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
+                    <Label Text="Status" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
+                    <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="services:DigitalOutput">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
+                            <Label Text="{Binding pName}" Grid.Column="0"/>
+                            <Label Text="{Binding pDescription}" Grid.Column="1"/>
+                            <HorizontalStackLayout Grid.Column="2">
+                                <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
+                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
+                                <Label Text="{Binding pDescription}" />
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
