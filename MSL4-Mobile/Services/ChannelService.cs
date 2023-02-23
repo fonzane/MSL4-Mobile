@@ -81,6 +81,34 @@ public class ChannelService
         return analogInputs;
     }
 
+	public async static Task<bool> SetAnalogInput(string ip, string sessionid, AnalogInput channel)
+	{
+		Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/{channel.id.ToString()}");
+
+		try
+		{
+			string json = JsonSerializer.Serialize<AnalogInput>(channel);
+			StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+			HttpResponseMessage response = await client.PutAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+				return true;
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+				return false;
+            }
+        }
+		catch (Exception ex)
+		{
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+			return false;
+        }
+	}
+
 	public async static Task<List<AnalogOutput>> GetAnalogOutputs(string ip, string sessionid)
 	{
         Uri uri = new Uri($"http://{ip}/RestAnalogOut/{sessionid}/");

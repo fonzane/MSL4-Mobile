@@ -40,6 +40,7 @@ public partial class AnalogView : ContentPage
 
     public async void OnSelectAnalogInput(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
+		(sender as ListView).SelectedItem = null;
 		await Navigation.PushAsync(new Analog.AnalogDetailsView(e.SelectedItem as AnalogInput));
     }
 }

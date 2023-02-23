@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:services="clr-namespace:MSL4_Mobile.Services"
-             xmlns:analog="clr-namespace:MSL4_Mobile.Views.Analog"
              x:Class="MSL4_Mobile.Views.Analog.AnalogDetailsView"
              x:Name="page"
              Title="AnalogDetailsView">
-
-    <Grid BindingContext="{x:Reference page}" RowSpacing="10" Margin="0,10,0,0">
+    <Grid RowSpacing="10" Margin="0,10,0,0" BindingContext="{x:Reference page}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -19,14 +22,40 @@
 
         <HorizontalStackLayout Grid.ColumnSpan="2" HeightRequest="30" HorizontalOptions="Center">
             <Label Text="Analoger Eingang " FontSize="24"/>
-            <Label Text="{Binding analogInput.pName}" Grid.Column="1" FontSize="24" />
+            <Entry Text="{Binding analogInput.pName}" Grid.Column="1" FontSize="24" />
         </HorizontalStackLayout>
 
         <Label Text="Zustand" Grid.Row="1" />
         <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
             <Label Text="{Binding analogInput.pValue}" />
-            <Label Text="{Binding analogInput.pUnit}" />
-            <Label Text="{Binding Units[0]}" />
+            <Picker
+                ItemsSource="{Binding Units}"
+                Title="{Binding analogInput.pUnit}"
+                HorizontalTextAlignment="Center"
+                SelectedItem="{Binding analogInput.pUnit}"/>
         </HorizontalStackLayout>
+
+        <Label Text="Factor" VerticalOptions="Center" Grid.Row="2" />
+        <Entry Text="{Binding analogInput.pFactor}" Grid.Column="1" Grid.Row="2"/>
+
+        <Label Text="Untere Grenze" VerticalOptions="Center" Grid.Row="3" />
+        <Entry Text="{Binding analogInput.pMinPower}" Grid.Column="1" Grid.Row="3"/>
+
+        <Label Text="Obere Grenze" VerticalOptions="Center" Grid.Row="4" />
+        <Entry Text="{Binding analogInput.pMaxPower}" Grid.Column="1" Grid.Row="4"/>
+
+        <Label Text="Typ" Grid.Row="5" />
+        <Picker
+            Grid.Row="5" Grid.Column="1"
+            ItemsSource="{Binding AnalogTypes}"
+            ItemDisplayBinding="{Binding Key}"
+            Title="{Binding channelType.Key}"
+            SelectedItem="{Binding channelType}"
+            SelectedIndexChanged="OnChangeAnalogType"/>
+
+        <Label Text="Aktiv" Grid.Row="6"/>
+        <CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding analogInput.pActive}" HorizontalOptions="Start"/>
+
+        <Button Clicked="OnSetChannelData" Text="Speichern" Grid.ColumnSpan="2" Grid.Row="7"/>
     </Grid>
 </ContentPage>

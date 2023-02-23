@@ -33,7 +33,7 @@
                                 <Label Text="{Binding pValue}"/>
                                 <Label Text="{Binding pUnit}"/>
                             </HorizontalStackLayout>
-                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -60,7 +60,7 @@
                                 <Label Text="{Binding pValueAnalog}"/>
                                 <Label Text="{Binding pValuePower}"/>
                             </HorizontalStackLayout>
-                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

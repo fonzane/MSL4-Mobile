@@ -29,7 +29,7 @@
                                 <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
                                 <Label Text="{Binding pValueText}" />
                             </HorizontalStackLayout>
-                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -57,7 +57,7 @@
                                 <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
                                 <Label Text="{Binding pDescription}" />
                             </HorizontalStackLayout>
-                            <Label Text="{Binding pActive}" Grid.Column="3"/>
+                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
