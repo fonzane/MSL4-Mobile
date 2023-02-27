@@ -8,7 +8,11 @@
 
     <VerticalStackLayout Spacing="20" Margin="0,20,0,0" BindingContext="{x:Reference page}">
 
-        <ListView ItemsSource="{Binding digitalInputs}" SelectionMode="None" HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
+        <ListView
+            ItemsSource="{Binding digitalInputs}"
+            SelectionMode="Single"
+            HeightRequest="{OnIdiom Desktop='auto', Phone=260}"
+            ItemSelected="OnSelectDigitalInput">
             <ListView.Header>
                 <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
                     <Label Text="Eingänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>

@@ -19,11 +19,11 @@ public partial class AnalogDetailsView : ContentPage
 
     public List<KeyValuePair<string, AnalogType>> AnalogTypes { get; } = new List<KeyValuePair<string, AnalogType>>()
     {
-        new KeyValuePair<string, AnalogType>("0-10 V", AnalogType.TYPE_0_10_V),
-        new KeyValuePair<string, AnalogType>("0,4-2 V", AnalogType.TYPE_0K4_2_V),
-        new KeyValuePair<string, AnalogType>("0-20 mA", AnalogType.TYPE_0_20_MA),
-        new KeyValuePair<string, AnalogType>("4-20 mA", AnalogType.TYPE_4_20_MA),
-        new KeyValuePair<string, AnalogType>("NTC 5K", AnalogType.TYPE_NTC_5_K)
+        new ("0-10 V", AnalogType.TYPE_0_10_V),
+        new ("0,4-2 V", AnalogType.TYPE_0K4_2_V),
+        new ("0-20 mA", AnalogType.TYPE_0_20_MA),
+        new ("4-20 mA", AnalogType.TYPE_4_20_MA),
+        new ("NTC 5K", AnalogType.TYPE_NTC_5_K)
     };
 
     public KeyValuePair<string, AnalogType> channelType { get; set; }
@@ -40,8 +40,9 @@ public partial class AnalogDetailsView : ContentPage
         bool response = await ChannelService.SetAnalogInput(AuthService.ipaddress, AuthService.sessionid, analogInput);
         if (response)
         {
+            // ToDo: Need to find a way to refresh AnalogView after setting channel data
             await Navigation.PopToRootAsync();
-            await Navigation.PushAsync(new AnalogView());
+            MessagingCenter.Send<AnalogDetailsView>(this, "updated");
         }
         else
         {

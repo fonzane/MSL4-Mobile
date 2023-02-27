@@ -6,6 +6,10 @@ namespace MSL4_Mobile.Services;
 public class ChannelService
 {
 	private static HttpClient client = new HttpClient();
+	private static JsonSerializerOptions serializerOptions = new JsonSerializerOptions
+	{
+		Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+	};
 
 	public async static Task<List<DigitalInput>> GetDigitalInputs(string ip, string sessionid)
 	{
@@ -31,7 +35,36 @@ public class ChannelService
 		return digitalInputChannelData;
 	}
 
-	public async static Task<List<DigitalOutput>> GetDigitalOutputs(string ip, string sessionid)
+    public async static Task<bool> SetDigitalInput(string ip, string sessionid, DigitalInput channel)
+    {
+        Uri uri = new Uri($"http://{ip}/RestDigitalIn/{sessionid}/{channel.id.ToString()}");
+
+        try
+        {
+            string json = JsonSerializer.Serialize<DigitalInput>(channel, serializerOptions);
+            StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+			Console.WriteLine(json.ToString());
+
+            HttpResponseMessage response = await client.PutAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+            return false;
+        }
+    }
+
+    public async static Task<List<DigitalOutput>> GetDigitalOutputs(string ip, string sessionid)
 	{
 		Uri uri = new Uri($"http://{ip}/RestDigitalOut/{sessionid}/");
 		List<DigitalOutput> digitalOutputChannelData = new List<DigitalOutput>();
@@ -87,7 +120,7 @@ public class ChannelService
 
 		try
 		{
-			string json = JsonSerializer.Serialize<AnalogInput>(channel);
+			string json = JsonSerializer.Serialize<AnalogInput>(channel, serializerOptions);
 			StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
 			HttpResponseMessage response = await client.PutAsync(uri, content);
@@ -225,6 +258,14 @@ public enum AnalogType
 	TYPE_NTC_5_K = 7,
     TYPE_4_20_MA = 8,
     TYPE_0K4_2_V = 9
+}
+
+public enum DigitalType
+{
+	TYPE_IMPULS = 101,
+	TYPE_ERROR_MESSAGE = 102,
+	TYPE_TIME_COUNTER = 103,
+	TYPE_STATE = 104
 }
 
 /*public class UnitList
