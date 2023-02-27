@@ -7,12 +7,12 @@
     <Grid RowSpacing="10" Margin="0,10,0,0" BindingContext="{x:Reference page}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,17 +25,17 @@
             <Entry Text="{Binding analogInput.pName}" Grid.Column="1" FontSize="24" />
         </HorizontalStackLayout>
 
-        <Label Text="Zustand" Grid.Row="1" />
+        <Label Text="Zustand" Grid.Row="1" VerticalOptions="Center" />
         <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
-            <Label Text="{Binding analogInput.pValue}" />
-            <Picker
+            <Label Text="{Binding analogInput.pValue}" VerticalOptions="Center" />
+            <Picker 
                 ItemsSource="{Binding Units}"
                 Title="{Binding analogInput.pUnit}"
                 HorizontalTextAlignment="Center"
                 SelectedItem="{Binding analogInput.pUnit}"/>
         </HorizontalStackLayout>
 
-        <Label Text="Factor" VerticalOptions="Center" Grid.Row="2" />
+        <Label Text="Faktor" VerticalOptions="Center" Grid.Row="2" />
         <Entry Text="{Binding analogInput.pFactor}" Grid.Column="1" Grid.Row="2"/>
 
         <Label Text="Untere Grenze" VerticalOptions="Center" Grid.Row="3" />
