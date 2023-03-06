@@ -15,10 +15,11 @@ public partial class MainPage : ContentPage
 
 	private async void InitializeMSL4Connection()
 	{
-		// ToDo: Give user the option to set the ip adress manually.
-		//string ip = await DisplayPromptAsync("Verbindung herstellen", "Geben Sie die IP-Adresse des Gerätes an.");
-		string ip = "192.168.20.65";
-		string sessionid = await AuthService.GetSessionID(ip);
+        // ToDo: Give user the option to set the ip adress manually.
+        //string ip = await DisplayPromptAsync("Verbindung herstellen", "Geben Sie die IP-Adresse des Gerätes an.");
+        //string ip = "msl4fw0189.fw-systeme.local";
+        string ip = "192.168.20.23";
+        string sessionid = await AuthService.GetSessionID(ip);
 		Console.WriteLine("MainPage sessionid: " + sessionid);
 		GreetingText = "You are logged in.";
 		// ToDo: Do something if no sessionid.

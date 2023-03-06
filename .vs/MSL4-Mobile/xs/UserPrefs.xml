@@ -1,26 +1,45 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/Digital/DigitalDetailsView.xaml.cs">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml.cs">
     <Files>
-      <File FileName="MSL4-Mobile/Views/Digital/DigitalDetailsView.xaml" />
-      <File FileName="MSL4-Mobile/Views/Digital/DigitalDetailsView.xaml.cs" Line="13" Column="1" />
-      <File FileName="MSL4-Mobile/Services/ChannelService.cs" />
-      <File FileName="MSL4-Mobile/Views/Digital/DigitalView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Services/MBusService.cs" Line="18" Column="22" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusView.xaml" Line="85" Column="15" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusView.xaml.cs" Line="72" Column="32" />
+      <File FileName="MSL4-Mobile/Platforms/MacCatalyst/Program.cs" Line="13" Column="1" />
+      <File FileName="MSL4-Mobile/Views/Digital/DigitalView.xaml" Line="1" Column="1" />
+      <File FileName="MSL4-Mobile/MainPage.xaml.cs" Line="21" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MSL4-Mobile" expanded="True" selected="True" />
+          <Node name="MSL4-Mobile" expanded="True">
+            <Node name="MSL4-Mobile" expanded="True">
+              <Node name="Platforms" expanded="True">
+                <Node name="MacCatalyst" expanded="True" />
+              </Node>
+              <Node name="Services" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Analog" expanded="True" />
+                <Node name="Digital" expanded="True" />
+                <Node name="MBus" expanded="True">
+                  <Node name="MBusView.xaml" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="MainPage.xaml" expanded="True">
+                <Node name="MainPage.xaml.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

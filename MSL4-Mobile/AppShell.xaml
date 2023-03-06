@@ -21,6 +21,10 @@
             Title="Analog"
             ContentTemplate="{DataTemplate views:AnalogView}" />
 
+        <ShellContent
+            Title="MBus"
+            ContentTemplate="{DataTemplate views:MBus.MBusView}" />
+
     </TabBar>
 
 </Shell>
