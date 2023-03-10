@@ -59,6 +59,7 @@
 	  <None Remove="Views\Analog\" />
 	  <None Remove="Views\Digital\" />
 	  <None Remove="Views\MBus\" />
+	  <None Remove="Views\GPIO\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -67,6 +68,11 @@
 	  <Folder Include="Views\Analog\" />
 	  <Folder Include="Views\Digital\" />
 	  <Folder Include="Views\MBus\" />
+	  <Folder Include="Views\GPIO\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />
+	  <MauiXaml Remove="Resources\Styles\Colors.xaml" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="Views\Digital\DigitalView.xaml">
@@ -78,5 +84,13 @@
 	  <MauiXaml Update="Views\Analog\AnalogDetailsView.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Styles\Styles.xaml" Condition=" '$(EnableDefaultXamlItems)' == 'true' ">
+	    <SubType>Designer</SubType>
+	  </BundleResource>
+	  <BundleResource Include="Resources\Styles\Colors.xaml" Condition=" '$(EnableDefaultXamlItems)' == 'true' ">
+	    <SubType>Designer</SubType>
+	  </BundleResource>
 	</ItemGroup>
 </Project>

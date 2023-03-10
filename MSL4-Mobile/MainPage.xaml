@@ -4,7 +4,67 @@
              x:Class="MSL4_Mobile.MainPage"
              x:Name="page">
 
-    <ScrollView>
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}">
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Name:" VerticalOptions="Center"/>
+            <Entry Text="{Binding mSL4Data.pName}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Beschreibung:" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pDescription}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Erstelungsdatum:" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pTimestamp}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Aktiv" VerticalOptions="Center" />
+            <CheckBox IsChecked="{Binding mSL4Data.pActive}" Grid.Column="1"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Stadt" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pCity}" Grid.Column="1"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Postleitzahl" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pPostalCode}" Grid.Column="1"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Straße" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pStreet}" Grid.Column="1"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Messperiode" VerticalOptions="Center" />
+            <Picker Grid.Column="1"
+                    ItemsSource="{Binding PeriodData}"
+                    ItemDisplayBinding="{Binding pLabel}"
+                    SelectedItem="{Binding selectedPeriodData}"
+                    Title="{Binding selectedPeriodData.pLabel}"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Hersteller" VerticalOptions="Center" />
+            <Entry Text="{Binding mSL4Data.pManufacturer}" Grid.Column="1"/>
+        </Grid>
+
+        <Button Text="Speichern" Clicked="OnSetDevicedata" Margin="0,2" />
+    </FlexLayout>
+
+    <!--<Grid BindingContext="{x:Reference page}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Name:" />
+        <Label Text="{Binding mSL4Data.pName}" Grid.Column="1"/>
+
+    </Grid>-->
+
+    <!--<ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
@@ -36,7 +96,7 @@
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
-    </ScrollView>
+    </ScrollView>-->
 
 </ContentPage>
 
