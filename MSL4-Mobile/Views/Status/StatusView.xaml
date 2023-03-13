@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             x:Name="page"
+             x:Class="MSL4_Mobile.Views.Status.StatusView"
+             Title="Statusübersicht">
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+        <Label Grid.ColumnSpan="2" Text="Allgemeine Einstellungen" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Türkontakt" VerticalOptions="Center"/>
+            <HorizontalStackLayout Grid.Column="1" >
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}" />
+                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" />
+                <Label Text="{Binding statusData.tuerkontakt}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Versorgung" VerticalOptions="Center"/>
+            <HorizontalStackLayout Grid.Column="1" >
+                <Image Source="ballyellow.png" IsVisible="{Binding statusData.stromausfall}" />
+                <Label Text="Akkubetrieb" IsVisible="{Binding statusData.stromausfall}" VerticalOptions="Center"/>
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" />
+                <Label Text="Netzbetrieb" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="MAC" />
+            <Label Text="{Binding statusData.mac}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Lan IP" />
+            <Label Text="{Binding statusData.lanip}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="WLAN IP" />
+            <Label Text="{Binding statusData.wlanip}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="VPN IP" />
+            <Label Text="{Binding statusData.vpnip}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Zertifikat" />
+            <Label Text="{Binding statusData.zertifikat}" Grid.Column="1" />
+        </Grid>
+        <Label Grid.ColumnSpan="2" Text="Hardware Statistiken" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Temperatur" />
+            <HorizontalStackLayout Grid.Column="1">
+                <Label Text="{Binding statusData.temperatur}" />
+                <Label Text="°C" />
+            </HorizontalStackLayout>
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="CPU avg." />
+            <Label Text="{Binding statusData.percentcpu}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="RAM frei" />
+            <Label Text="{Binding statusData.memavailable}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="RAM ges." />
+            <Label Text="{Binding statusData.memtotal}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Freier Speicher" />
+            <Label Text="{Binding statusData.spacefree}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Speicher ges." />
+            <Label Text="{Binding statusData.spacetotal}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Swap frei" />
+            <Label Text="{Binding statusData.swapfree}" Grid.Column="1" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Swap ges." />
+            <Label Text="{Binding statusData.swaptotal}" Grid.Column="1" />
+        </Grid>
+        <Label Grid.ColumnSpan="2" Text="Modem Statistiken" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
+        <Grid ColumnDefinitions="*,*" Margin="0,2">
+            <Label Text="Modem" VerticalOptions="Center"/>
+            <HorizontalStackLayout Grid.Column="1" >
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.pModemActive}" />
+                <Image Source="ballred.png" IsVisible="{Binding statusData.pModemActive, Converter={services:InvertBool}}" />
+                <Label Text="Aktiv" IsVisible="{Binding statusData.pModemActive}" VerticalOptions="Center"/>
+                <Label Text="Nicht aktiv" IsVisible="{Binding statusData.pModemActive, Converter={services:InvertBool}}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Grid>
+        <!-- ToDo: Implement Modem statistics -->         
+        <Grid IsVisible="{Binding statusData.pModemActive}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Mobilnummer" />
+            <Label Text="{Binding statusData.mobilnumber}" Grid.Column="1"/>
+
+            <Label Text="Modem Netz" Grid.Row="1"/>
+            <Label Text="{Binding statusData.modemaccesstechnology}" Grid.Row="1" Grid.Column="1" />
+
+            <Label Text="Feldstärke" Grid.Row="2"/>
+            <Label Text="{Binding statusData.empfang}" Grid.Row="2" Grid.Column="1" />
+
+            <Label Text="Modem IP" Grid.Row="3"/>
+            <Label Text="{Binding statusData.modemip}" Grid.Row="3" Grid.Column="1" />
+
+            <Label Text="MCC" Grid.Row="4"/>
+            <Label Text="{Binding statusData.lat}" Grid.Row="4" Grid.Column="1" />
+
+            <Label Text="MNC" Grid.Row="5"/>
+            <Label Text="{Binding statusData.lon}" Grid.Row="5" Grid.Column="1" />
+
+            <Label Text="Area Code" Grid.Row="6"/>
+            <Label Text="{Binding statusData.areacode}" Grid.Row="6" Grid.Column="1" />
+
+            <Label Text="Cell ID" Grid.Row="7"/>
+            <Label Text="{Binding statusData.cellid}" Grid.Row="7" Grid.Column="1" />
+
+            <Label Text="SIM-Status" Grid.Row="8"/>
+            <Label Text="{Binding statusData.modemerrortext}" Grid.Row="8" Grid.Column="1" />
+
+        </Grid>
+    </FlexLayout>
+</ContentPage>

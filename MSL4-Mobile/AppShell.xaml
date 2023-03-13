@@ -10,8 +10,12 @@
     <TabBar>
 
         <ShellContent
-            Title="Home"
+            Title="MSL4"
             ContentTemplate="{DataTemplate local:MainPage}"/>
+
+        <ShellContent
+            Title="Status"
+            ContentTemplate="{DataTemplate views:Status.StatusView}" />
 
         <ShellContent
             Title="Digital"

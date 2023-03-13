@@ -4,7 +4,7 @@
              x:Class="MSL4_Mobile.MainPage"
              x:Name="page">
 
-    <FlexLayout Direction="Column" BindingContext="{x:Reference page}">
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Name:" VerticalOptions="Center"/>
             <Entry Text="{Binding mSL4Data.pName}" Grid.Column="1" />
@@ -15,7 +15,7 @@
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Erstelungsdatum:" VerticalOptions="Center" />
-            <Entry Text="{Binding mSL4Data.pTimestamp}" Grid.Column="1" />
+            <Entry Text="{Binding mSL4Data.pTimestamp}" Grid.Column="1" IsReadOnly="True" />
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Aktiv" VerticalOptions="Center" />
@@ -43,10 +43,10 @@
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Hersteller" VerticalOptions="Center" />
-            <Entry Text="{Binding mSL4Data.pManufacturer}" Grid.Column="1"/>
+            <Entry Text="{Binding mSL4Data.pManufacturer}" Grid.Column="1" IsReadOnly="True"/>
         </Grid>
 
-        <Button Text="Speichern" Clicked="OnSetDevicedata" Margin="0,2" />
+        <Button Text="Speichern" Clicked="OnSetDevicedata" Margin="0,4" />
     </FlexLayout>
 
     <!--<Grid BindingContext="{x:Reference page}">

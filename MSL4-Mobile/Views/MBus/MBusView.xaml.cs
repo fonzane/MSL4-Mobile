@@ -8,6 +8,8 @@ public partial class MBusView : ContentPage
 	private Timer timer;
 	private int invokeCount = 0;
 	private string searchInitTimestamp;
+	private MBusService mBusService;
+
 	public bool loading { get; set; } = false;
 
 	public ObservableCollection<ComDataResponse.ComData> comDataCol { get; } = new ObservableCollection<ComDataResponse.ComData>();
@@ -20,6 +22,7 @@ public partial class MBusView : ContentPage
 	public MBusView()
 	{
 		InitializeComponent();
+		mBusService = new MBusService();
 		GetBaudData();
 		GetComData();
 		GetMBusDevices();
@@ -41,7 +44,7 @@ public partial class MBusView : ContentPage
 	{
 		Console.WriteLine("Initializing MBus search");
 		searchInitTimestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-        MBusSearchResponse mBusSearchResponse = await MBusService.InitializeMBusSearch(AuthService.ipaddress, AuthService.sessionid, selectedCom.id, selectedBaudRate.pLabel, searchInitTimestamp);
+        MBusSearchResponse mBusSearchResponse = await mBusService.InitializeMBusSearch(AuthService.ipaddress, AuthService.sessionid, selectedCom.id, selectedBaudRate.pLabel, searchInitTimestamp);
 
 		if (mBusSearchResponse != null && mBusSearchResponse.LogType == 1)
 		{
@@ -59,14 +62,14 @@ public partial class MBusView : ContentPage
 
 	private async Task<MBusSearchResponse> CheckMBusSearchStatus(string initialTimestamp)
 	{
-		MBusSearchResponse mBusSearchResponse = await MBusService.CheckMBusSearchStatus(AuthService.ipaddress, AuthService.sessionid, initialTimestamp);
+		MBusSearchResponse mBusSearchResponse = await mBusService.CheckMBusSearchStatus(AuthService.ipaddress, AuthService.sessionid, initialTimestamp);
 		return mBusSearchResponse;
 	}
 
 	private async void GetMBusDevices()
 	{
 		Console.WriteLine("Getting MBus Devices");
-        MBusDevicesResponse mBusDevicesResponse = await MBusService.GetMBusDevices(AuthService.ipaddress, AuthService.sessionid);
+        MBusDevicesResponse mBusDevicesResponse = await mBusService.GetMBusDevices(AuthService.ipaddress, AuthService.sessionid);
 		foreach(MBusDeviceData mBusDevice in mBusDevicesResponse.items)
 		{
 			mBusDevices.Add(mBusDevice);
@@ -76,7 +79,7 @@ public partial class MBusView : ContentPage
 	private async void GetComData()
 	{
 		Console.WriteLine("Getting ComData");
-		ComDataResponse comData = await MBusService.GetComData(AuthService.ipaddress, AuthService.sessionid);
+		ComDataResponse comData = await mBusService.GetComData(AuthService.ipaddress, AuthService.sessionid);
 		Console.WriteLine(comData.identifier + " - " + comData.label);
 		foreach(ComDataResponse.ComData data in comData.items)
 		{
@@ -88,7 +91,7 @@ public partial class MBusView : ContentPage
     private async void GetBaudData()
     {
         Console.WriteLine("Getting BaudData");
-        BaudDataResponse baudData = await MBusService.GetBaudData(AuthService.ipaddress, AuthService.sessionid);
+        BaudDataResponse baudData = await mBusService.GetBaudData(AuthService.ipaddress, AuthService.sessionid);
         Console.WriteLine(baudData.identifier + " - " + baudData.label);
         foreach (BaudDataResponse.BaudData data in baudData.items)
         {
@@ -105,5 +108,10 @@ public partial class MBusView : ContentPage
 			return;
 		}
 		InitializeMBusSearch();
+    }
+
+    async void OnSelectMBusDevice(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
+    {
+		await Navigation.PushAsync(new MBus.MBusDetailsView((e.CurrentSelection.FirstOrDefault() as MBusDeviceData).id));
     }
 }

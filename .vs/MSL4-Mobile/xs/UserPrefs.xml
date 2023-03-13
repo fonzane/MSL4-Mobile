@@ -1,29 +1,36 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
-  <MultiItemStartupConfigurations />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/App.xaml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml">
     <Files>
-      <File FileName="MSL4-Mobile/App.xaml" Line="1" Column="1" />
+      <File FileName="MSL4-Mobile/MainPage.xaml" Line="49" Column="71" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="MSL4-Mobile" expanded="True">
             <Node name="MSL4-Mobile" expanded="True">
+              <Node name="Resources" expanded="True">
+                <Node name="Images" expanded="True" />
+              </Node>
               <Node name="Services" expanded="True" />
-              <Node name="App.xaml" selected="True" />
-              <Node name="MainPage.xaml" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Status" expanded="True">
+                  <Node name="StatusView.xaml" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="MainPage.xaml" expanded="True" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
 </Properties>

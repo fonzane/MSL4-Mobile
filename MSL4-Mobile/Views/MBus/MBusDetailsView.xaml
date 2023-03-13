@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MSL4_Mobile.Views.MBus.MBusDetailsView"
+             x:Name="page"
+             Title="MBusDetailsView">
+
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+        <Label Text="MBus Gerätedetails" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Name" VerticalOptions="Center"/>
+            <Entry Text="{Binding deviceDetails.pName}" Grid.Column="1" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Beschreibung" VerticalOptions="Center"/>
+            <Entry Text="{Binding deviceDetails.pDescription}" Grid.Column="1" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Erstellungsdatum" VerticalOptions="Center"/>
+            <Entry Text="{Binding deviceDetails.pTimestamp}" Grid.Column="1" IsReadOnly="True" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Beschreibung" VerticalOptions="Center"/>
+            <Entry Text="{Binding deviceDetails.pManufacturer}" Grid.Column="1" IsReadOnly="True" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Aktiv" VerticalOptions="Center"/>
+            <CheckBox IsChecked="{Binding deviceDetails.pActive}" HorizontalOptions="Start" Grid.Column="1" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Erfassungsperiode" VerticalOptions="Center"/>
+            <Picker Title="{Binding deviceDetails.pPeriod}" Grid.Column="1" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Auslesen mit Sekundäradresse" VerticalOptions="Center"/>
+            <HorizontalStackLayout  Grid.Column="1">
+                <CheckBox IsChecked="{Binding deviceDetails.pReadSecondary}" />
+                <Entry Text="{Binding deviceDetails.pDeviceSecAddress}" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" Margin="0,4">
+            <Label Text="Multiframe" VerticalOptions="Center"/>
+            <CheckBox IsChecked="{Binding deviceDetails.pReadSecFrame}" HorizontalOptions="Start" Grid.Column="1" />
+        </Grid>
+
+    </FlexLayout>
+</ContentPage>

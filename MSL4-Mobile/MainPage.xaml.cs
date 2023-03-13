@@ -25,7 +25,7 @@ public partial class MainPage : ContentPage
         // ToDo: Give user the option to set the ip adress manually.
         //string ip = await DisplayPromptAsync("Verbindung herstellen", "Geben Sie die IP-Adresse des Gerätes an.");
         //string ip = "msl4fw0189.fw-systeme.local";
-        string ip = "192.168.20.23";
+        string ip = "msl4fw0189.fw-systeme.local";
         string sessionid = await AuthService.GetSessionID(ip);
 		Console.WriteLine("MainPage sessionid: " + sessionid);
 		//GreetingText = "You are logged in.";
@@ -39,6 +39,7 @@ public partial class MainPage : ContentPage
 		Console.WriteLine("Getting MSL4 Device Data...");
 		mSL4Data = await _MSL4Service.GetMSL4Data(AuthService.ipaddress, AuthService.sessionid);
 		selectedPeriodData = _MSL4Service.PeriodData.FirstOrDefault(p => p.id == mSL4Data.pPeriod);
+		Console.WriteLine("Selected Period: " + selectedPeriodData.pLabel);
 		OnPropertyChanged(nameof(selectedPeriodData));
 		OnPropertyChanged(nameof(mSL4Data));
 		Console.WriteLine(mSL4Data.pName);
@@ -64,6 +65,7 @@ public partial class MainPage : ContentPage
             Console.WriteLine("Success Setting MSL4Device Data...");
             Console.WriteLine(mSL4DataResponse.pName);
 			GetDeviceData();
+			GetPeriodData();
 		}
 		else
 		{

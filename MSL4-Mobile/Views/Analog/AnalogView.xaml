@@ -16,7 +16,7 @@
             <ListView.Header>
                 <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
                     <Label Text="Eingänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
-                    <Label Text="Zum Bearbeiten anklicken" VerticalOptions="Center" Grid.Column="2" Grid.Row="0" />
+                    <!--<Label Text="Zum Bearbeiten anklicken" VerticalOptions="Center" Grid.Column="2" Grid.Row="0" />-->
                     <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                     <Label Text="Typ" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
                     <Label Text="Wert" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>

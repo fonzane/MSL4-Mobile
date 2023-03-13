@@ -60,6 +60,7 @@
 	  <None Remove="Views\Digital\" />
 	  <None Remove="Views\MBus\" />
 	  <None Remove="Views\GPIO\" />
+	  <None Remove="Views\Status\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -69,6 +70,7 @@
 	  <Folder Include="Views\Digital\" />
 	  <Folder Include="Views\MBus\" />
 	  <Folder Include="Views\GPIO\" />
+	  <Folder Include="Views\Status\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />

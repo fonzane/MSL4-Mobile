@@ -59,7 +59,8 @@
         <CollectionView Grid.Row="4" Grid.ColumnSpan="2"
                         ItemsSource="{Binding mBusDevices}"
                         SelectionMode="Single"
-                        Header="MBus Geräte">
+                        Header="MBus Geräte"
+                        SelectionChanged="OnSelectMBusDevice">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
