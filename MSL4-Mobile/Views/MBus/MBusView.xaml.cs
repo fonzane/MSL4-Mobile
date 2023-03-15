@@ -112,6 +112,15 @@ public partial class MBusView : ContentPage
 
     async void OnSelectMBusDevice(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
     {
-		await Navigation.PushAsync(new MBus.MBusDetailsView((e.CurrentSelection.FirstOrDefault() as MBusDeviceData).id));
+		MBusDeviceData mBusDeviceData = e.CurrentSelection.FirstOrDefault() as MBusDeviceData;
+		selectedCom = comDataCol.FirstOrDefault(c => c.id == mBusDeviceData.pPortName, comDataCol[0]);
+
+        await Navigation.PushAsync(new MBus.MBusDetailsView(
+			mBusDeviceData.id,
+			new List<ComDataResponse.ComData>(comDataCol),
+			new List<BaudDataResponse.BaudData>(baudDataCol),
+			selectedCom, selectedBaudRate
+			)
+		);
     }
 }
