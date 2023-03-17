@@ -5,8 +5,10 @@ namespace MSL4_Mobile.Services;
 
 public class MBusService
 {
-	private HttpClient client;
-	private static JsonSerializerOptions serializerOptions;
+    private HttpClient client;
+    private JsonSerializerOptions serializerOptions;
+
+    public List<DataStruct> PeriodData { get; }
 
     public MBusService()
     {
@@ -14,6 +16,14 @@ public class MBusService
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
+        PeriodData = new List<DataStruct>()
+        {
+            new DataStruct{ id = 60, pLabel = "Minute" },
+            new DataStruct{ id = 300, pLabel = "5 Minuten" },
+            new DataStruct{ id = 900, pLabel = "15 Minuten" },
+            new DataStruct{ id = 3600, pLabel = "Stunde" },
+            new DataStruct{ id = 86400, pLabel = "Tag" },
         };
     }
 
@@ -42,34 +52,63 @@ public class MBusService
         return mBusDeviceDetails;
     }
 
-	public async Task<MBusDevicesResponse> GetMBusDevices(string ip, string sessionid)
-	{
-		Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=1");
-		MBusDevicesResponse getMBusDevicesResponse = null;
-
+    public async Task<MBusDeviceDetails> SetMBusDeviceDetails(string ip, string sessionid, MBusDeviceDetails deviceDetails)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData");
+        MBusDeviceDetails deviceDetailsResponse = null;
         try
-		{
-			HttpResponseMessage response = await client.GetAsync(uri);
-			if (response.IsSuccessStatusCode)
-			{
-				string stringResponse = await response.Content.ReadAsStringAsync();
-				getMBusDevicesResponse = JsonSerializer.Deserialize<MBusDevicesResponse>(stringResponse);
-			} else
-			{
+        {
+            string json = JsonSerializer.Serialize<MBusDeviceDetails>(deviceDetails, serializerOptions);
+            Console.WriteLine(json.ToString());
+            StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            Console.WriteLine(content.ToString());
+
+            HttpResponseMessage response = await client.PostAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                deviceDetailsResponse = JsonSerializer.Deserialize<MBusDeviceDetails>(stringResponse);
+            }
+            else
+            {
                 Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
             }
-		}
+        }
         catch (Exception ex)
         {
             Console.WriteLine(@"\tERROR {0}", ex.Message);
         }
-		return getMBusDevicesResponse;
+        return deviceDetailsResponse;
     }
 
-	public async Task<ComDataResponse> GetComData(string ip, string sessionid)
-	{
-		Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectComData?pSessionID={sessionid}&pType=1");
-		ComDataResponse comData = null;
+    public async Task<MBusDevicesResponse> GetMBusDevices(string ip, string sessionid)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=1");
+        MBusDevicesResponse getMBusDevicesResponse = null;
+
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                getMBusDevicesResponse = JsonSerializer.Deserialize<MBusDevicesResponse>(stringResponse);
+            } else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return getMBusDevicesResponse;
+    }
+
+    public async Task<ComDataResponse> GetComData(string ip, string sessionid)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectComData?pSessionID={sessionid}&pType=1");
+        ComDataResponse comData = null;
         try
         {
             HttpResponseMessage response = await client.GetAsync(uri);
@@ -112,6 +151,30 @@ public class MBusService
             Console.WriteLine(@"\tERROR {0}", ex.Message);
         }
         return baudData;
+    }
+
+    public async Task<MBusIndexDataResponse> GetMBusIndexData(string ip, string sessionid, int deviceID)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectMBusIndex?pSessionID={sessionid}&pDBDeviceID={deviceID}");
+        MBusIndexDataResponse indexData = null;
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                indexData = JsonSerializer.Deserialize<MBusIndexDataResponse>(stringResponse);
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return indexData;
     }
 
 	public async Task<MBusSearchResponse> InitializeMBusSearch(
@@ -172,7 +235,18 @@ public class MBusService
     }
 }
 
+public readonly struct DataStruct
+{
+    public int id { get; init; }
+    public string pLabel { get; init; }
+}
 
+public class MBusIndexDataResponse
+{
+    public string identifier { get; set; }
+    public string label { get; set; }
+    public List<DataStruct> items { get; set; }
+}
 
 public class MBusSearchResponse
 {
@@ -185,13 +259,7 @@ public class BaudDataResponse
 {
 	public string identifier { get; set; }
 	public string label { get; set; }
-	public List<BaudData> items { get; set; }
-
-	public class BaudData
-	{
-		public int id { get; set; }
-		public string pLabel { get; set; }
-	}
+	public List<DataStruct> items { get; set; }
 }
 
 public class ComDataResponse
@@ -274,4 +342,5 @@ public class MBusDeviceDetails
     public string pMBusMedium { get; set; }
     public int pDeviceAddress { get; set; }
     public string pPassword { get; set; }
+    public string pSessionID { get; set; }
 }

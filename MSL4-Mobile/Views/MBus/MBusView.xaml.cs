@@ -13,11 +13,11 @@ public partial class MBusView : ContentPage
 	public bool loading { get; set; } = false;
 
 	public ObservableCollection<ComDataResponse.ComData> comDataCol { get; } = new ObservableCollection<ComDataResponse.ComData>();
-	public ObservableCollection<BaudDataResponse.BaudData> baudDataCol { get; } = new ObservableCollection<BaudDataResponse.BaudData>();
+	public ObservableCollection<DataStruct> baudDataCol { get; } = new ObservableCollection<DataStruct>();
 	public ObservableCollection<MBusDeviceData> mBusDevices { get; } = new ObservableCollection<MBusDeviceData>();
 
 	public ComDataResponse.ComData selectedCom { get; set; }
-	public BaudDataResponse.BaudData selectedBaudRate { get; set; }
+	public DataStruct selectedBaudRate { get; set; }
 
 	public MBusView()
 	{
@@ -93,7 +93,7 @@ public partial class MBusView : ContentPage
         Console.WriteLine("Getting BaudData");
         BaudDataResponse baudData = await mBusService.GetBaudData(AuthService.ipaddress, AuthService.sessionid);
         Console.WriteLine(baudData.identifier + " - " + baudData.label);
-        foreach (BaudDataResponse.BaudData data in baudData.items)
+        foreach (DataStruct data in baudData.items)
         {
 			baudDataCol.Add(data);
         }
@@ -118,7 +118,7 @@ public partial class MBusView : ContentPage
         await Navigation.PushAsync(new MBus.MBusDetailsView(
 			mBusDeviceData.id,
 			new List<ComDataResponse.ComData>(comDataCol),
-			new List<BaudDataResponse.BaudData>(baudDataCol),
+			new List<DataStruct>(baudDataCol),
 			selectedCom, selectedBaudRate
 			)
 		);

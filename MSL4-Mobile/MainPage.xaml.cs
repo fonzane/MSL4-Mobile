@@ -25,7 +25,7 @@ public partial class MainPage : ContentPage
         // ToDo: Give user the option to set the ip adress manually.
         //string ip = await DisplayPromptAsync("Verbindung herstellen", "Geben Sie die IP-Adresse des Gerätes an.");
         //string ip = "msl4fw0189.fw-systeme.local";
-        string ip = "msl4fw0189.fw-systeme.local";
+        string ip = "proxy.webmonitor.fw-systeme.de/?target=10.211.8.148";
         string sessionid = await AuthService.GetSessionID(ip);
 		Console.WriteLine("MainPage sessionid: " + sessionid);
 		//GreetingText = "You are logged in.";
