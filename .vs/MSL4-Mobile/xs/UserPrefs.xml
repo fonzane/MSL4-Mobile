@@ -1,36 +1,21 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/MBus/MBusDetailsView.xaml">
     <Files>
-      <File FileName="MSL4-Mobile/MainPage.xaml" Line="49" Column="71" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusView.xaml" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusDetailsView.xaml" Line="122" Column="99" />
+      <File FileName="MSL4-Mobile/Views/MBus/MBusDetailsView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Services/MBusService.cs" />
+      <File FileName="MSL4-Mobile/MainPage.xaml.cs" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MSL4-Mobile" expanded="True">
-            <Node name="MSL4-Mobile" expanded="True">
-              <Node name="Resources" expanded="True">
-                <Node name="Images" expanded="True" />
-              </Node>
-              <Node name="Services" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Status" expanded="True">
-                  <Node name="StatusView.xaml" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="MainPage.xaml" expanded="True" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
 </Properties>

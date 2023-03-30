@@ -22,7 +22,6 @@ public class MSL4Service
     public MSL4Service()
 	{
         client = new HttpClient();
-        client.DefaultRequestHeaders.Add("Cookie", "authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRzY2hhZmZlcnRAZnctc3lzdGVtZS5kZSIsIm5hbWUiOiJUaW0gU2NoYWZmZXJ0Iiwicm9sZXMiOlsic3VwZXJ1c2VyIl0sImRpdmlzaW9uIjoiVXNlciIsIl9pZCI6IjYxYjIwYTQ4ZWViZWY4YmEzYzkwMzE2OSIsImFkbWluaXN0cmF0b3MiOlsiNjFiMjBhNDhlZWJlZjhiYTNjOTAzMTY5Il0sImlhdCI6MTY3ODg4NzI1NiwiZXhwIjoxNjc5MjMyODU2fQ.qE7FwU7Vu34ZHJzCeYUBXCZiYEdslvhUca0LSSUxHCA");
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
@@ -31,7 +30,7 @@ public class MSL4Service
 
     public async Task<MSL4Data> SetMSL4Data(string ip, MSL4Data mSL4Data)
     {
-        Uri uri = new Uri($"https://{ip}/LogWeb/servlet/MSL4DeviceData");
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/MSL4DeviceData");
         MSL4Data mSL4DataResponse = null;
         try
         {
@@ -60,7 +59,7 @@ public class MSL4Service
 
     public async Task<MSL4Data> GetMSL4Data(string ip, string sessionid)
     {
-        Uri uri = new Uri($"https://{ip}/LogWeb/servlet/MSL4DeviceData?pSessionID={sessionid}");
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/MSL4DeviceData?pSessionID={sessionid}");
         MSL4Data mSL4Data = null;
 
         try
@@ -85,7 +84,7 @@ public class MSL4Service
 
     public async Task<PeriodDataResponse> GetMSL4PeriodData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"https://{ip}/LogWeb/servlet/SelectPeriodData?pSessionID={sessionid}");
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectPeriodData?pSessionID={sessionid}");
         PeriodDataResponse periodDataResponse = null;
 
         try

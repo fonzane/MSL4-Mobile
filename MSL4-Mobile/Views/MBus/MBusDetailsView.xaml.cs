@@ -17,6 +17,7 @@ public partial class MBusDetailsView : ContentPage
 	public DataStruct selectedPeriodData { get; set; }
 
 	public MBusDeviceDetails deviceDetails { get; set; }
+	public List<MBusChannelData> channelData { get; set; }
 
 	public enum PortTypes
 	{
@@ -39,6 +40,7 @@ public partial class MBusDetailsView : ContentPage
 
 		GetDeviceDetails(deviceID);
 		GetMBusIndexData(deviceID);
+		GetChannelData(deviceID);
 	}
 
 	private async void GetDeviceDetails(int deviceID)
@@ -62,6 +64,13 @@ public partial class MBusDetailsView : ContentPage
 		{
 			Console.WriteLine("Error fetching MBusIndexData (response is null)...");
 		}
+	}
+
+	private async void GetChannelData(int deviceID)
+	{
+		channelData = await mBusService.GetMBusChannelData(AuthService.ipaddress, AuthService.sessionid, deviceID);
+		OnPropertyChanged(nameof(channelData));
+
 	}
 
     async void OnSetMBusDeviceDetails(System.Object sender, System.EventArgs e)

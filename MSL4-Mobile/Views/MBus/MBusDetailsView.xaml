@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:MSL4_Mobile.Converters"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
              x:Class="MSL4_Mobile.Views.MBus.MBusDetailsView"
              x:Name="page"
              Title="MBus Gerätedetails">
@@ -11,104 +12,165 @@
         <x:Int32 x:Key="TCP">3</x:Int32>
     </ContentPage.Resources>
 
-    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
-        <!--<Label Text="MBus Gerätedetails" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />-->
+    <CollectionView
+        ItemsSource="{Binding channelData}"
+        BindingContext="{x:Reference page}"
+        Header="{Binding .}">
+        <CollectionView.HeaderTemplate>
+            <DataTemplate>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Name" VerticalOptions="Center"/>
-            <Entry Text="{Binding deviceDetails.pName}" Grid.Column="1" />
-        </Grid>
+                <VerticalStackLayout Padding="10,20">
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Beschreibung" VerticalOptions="Center"/>
-            <Entry Text="{Binding deviceDetails.pDescription}" Grid.Column="1" />
-        </Grid>
+                    <!--<Label Text="MBus Gerätedetails" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />-->
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Erstellungsdatum" VerticalOptions="Center"/>
-            <Entry Text="{Binding deviceDetails.pTimestamp}" Grid.Column="1" IsReadOnly="True" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Name" VerticalOptions="Center"/>
+                        <Entry Text="{Binding deviceDetails.pName}" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Hersteller" VerticalOptions="Center"/>
-            <Entry Text="{Binding deviceDetails.pManufacturer}" Grid.Column="1" IsReadOnly="True" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Beschreibung" VerticalOptions="Center"/>
+                        <Entry Text="{Binding deviceDetails.pDescription}" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Aktiv" VerticalOptions="Center"/>
-            <CheckBox IsChecked="{Binding deviceDetails.pActive}" HorizontalOptions="Start" Grid.Column="1" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Erstellungsdatum" VerticalOptions="Center"/>
+                        <Entry Text="{Binding deviceDetails.pTimestamp}" Grid.Column="1" IsReadOnly="True" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Erfassungsperiode" VerticalOptions="Center"/>
-            <Picker Grid.Column="1"
-                    ItemsSource="{Binding mBusService.PeriodData}"
-                    ItemDisplayBinding="{Binding pLabel}"
-                    SelectedItem="{Binding selectedPeriodData}"
-                    Title="{Binding deviceDetails.pPeriod}"/>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Hersteller" VerticalOptions="Center"/>
+                        <Entry Text="{Binding deviceDetails.pManufacturer}" Grid.Column="1" IsReadOnly="True" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Auslesen mit Sekundäradresse" VerticalOptions="Center"/>
-            <Grid ColumnDefinitions="40,*" Grid.Column="1">
-                <CheckBox IsChecked="{Binding deviceDetails.pReadSecondary}" />
-                <Entry Text="{Binding deviceDetails.pDeviceSecAddress}" Grid.Column="1"/>
-            </Grid>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Aktiv" VerticalOptions="Center"/>
+                        <CheckBox IsChecked="{Binding deviceDetails.pActive}" HorizontalOptions="Start" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Multiframe" VerticalOptions="Center"/>
-            <CheckBox IsChecked="{Binding deviceDetails.pReadSecFrame}" HorizontalOptions="Start" Grid.Column="1" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Erfassungsperiode" VerticalOptions="Center"/>
+                        <Picker Grid.Column="1"
+                                ItemsSource="{Binding mBusService.PeriodData}"
+                                ItemDisplayBinding="{Binding pLabel}"
+                                SelectedItem="{Binding selectedPeriodData}"
+                                Title="{Binding deviceDetails.pPeriod}"/>
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Status prüfen" VerticalOptions="Center"/>
-            <CheckBox IsChecked="{Binding deviceDetails.pCheckStatus}" HorizontalOptions="Start" Grid.Column="1" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Auslesen mit Sekundäradresse" VerticalOptions="Center"/>
+                        <Grid ColumnDefinitions="40,*" Grid.Column="1">
+                            <CheckBox IsChecked="{Binding deviceDetails.pReadSecondary}" />
+                            <Entry Text="{Binding deviceDetails.pDeviceSecAddress}" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Primäradresse" VerticalOptions="Center"/>
-            <Entry Text="{Binding deviceDetails.pDeviceAddress}" Grid.Column="1" />
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Multiframe" VerticalOptions="Center"/>
+                        <CheckBox IsChecked="{Binding deviceDetails.pReadSecFrame}" HorizontalOptions="Start" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4" RadioButtonGroup.SelectedValue="{Binding deviceDetails.pPortType}">
-            <Label Text="Verbindungsart" VerticalOptions="Center"/>
-            <Grid ColumnDefinitions="*,*" Grid.Column="1">
-                <RadioButton Content="Seriell" IsChecked="{Binding deviceDetails.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource Serial}}" />
-                <RadioButton Content="TCP" IsChecked="{Binding deviceDetails.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource TCP}}" Grid.Column="1"/>
-            </Grid>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Status prüfen" VerticalOptions="Center"/>
+                        <CheckBox IsChecked="{Binding deviceDetails.pCheckStatus}" HorizontalOptions="Start" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Interface" VerticalOptions="Center"/>
-            <Grid ColumnDefinitions="*,*" Grid.Column="1">
-                <Picker ItemsSource="{Binding comData}"
-                        ItemDisplayBinding="{Binding pLabel}"
-                        SelectedItem="{Binding selectedCom}"
-                        Title="{Binding selectedCom.pLabel}"/>
-                <Entry Text="{Binding deviceDetails.pTCPAddress}" Grid.Column="1" Placeholder="TCP-Adresse"/>
-            </Grid>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Primäradresse" VerticalOptions="Center"/>
+                        <Entry Text="{Binding deviceDetails.pDeviceAddress}" Grid.Column="1" />
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Baud" VerticalOptions="Center"/>
-            <Picker Grid.Column="1"
-                    ItemsSource="{Binding baudData}"
-                    ItemDisplayBinding="{Binding pLabel}"
-                    SelectedItem="{Binding selectedBaud}"
-                    Title="{Binding selectedBaud.pLabel}"/>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4" RadioButtonGroup.SelectedValue="{Binding deviceDetails.pPortType}">
+                        <Label Text="Verbindungsart" VerticalOptions="Center"/>
+                        <Grid ColumnDefinitions="*,*" Grid.Column="1">
+                            <RadioButton Content="Seriell" IsChecked="{Binding deviceDetails.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource Serial}}" />
+                            <RadioButton Content="TCP" IsChecked="{Binding deviceDetails.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource TCP}}" Grid.Column="1"/>
+                        </Grid>
+                    </Grid>
 
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
-            <Label Text="Geräteindex" VerticalOptions="Center"/>
-            <Picker Grid.Column="1"
-                    ItemsSource="{Binding indexData}"
-                    ItemDisplayBinding="{Binding pLabel}"
-                    SelectedItem="{Binding selectedIndex}"
-                    Title="{Binding deviceDetails.pPosition}"/>
-        </Grid>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Interface" VerticalOptions="Center"/>
+                        <Grid ColumnDefinitions="*,*" Grid.Column="1">
+                            <Picker ItemsSource="{Binding comData}"
+                                    ItemDisplayBinding="{Binding pLabel}"
+                                    SelectedItem="{Binding selectedCom}"
+                                    Title="{Binding selectedCom.pLabel}"/>
+                            <Entry Text="{Binding deviceDetails.pTCPAddress}" Grid.Column="1" Placeholder="TCP-Adresse"/>
+                        </Grid>
+                    </Grid>
 
-        <Button Text="Speichern" Clicked="OnSetMBusDeviceDetails" Margin="0,4" />
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Baud" VerticalOptions="Center"/>
+                        <Picker Grid.Column="1"
+                                ItemsSource="{Binding baudData}"
+                                ItemDisplayBinding="{Binding pLabel}"
+                                SelectedItem="{Binding selectedBaud}"
+                                Title="{Binding selectedBaud.pLabel}"/>
+                    </Grid>
 
-    </FlexLayout>
+                    <Grid ColumnDefinitions="*,*" Margin="0,4">
+                        <Label Text="Geräteindex" VerticalOptions="Center"/>
+                        <Picker Grid.Column="1"
+                                ItemsSource="{Binding indexData}"
+                                ItemDisplayBinding="{Binding pLabel}"
+                                SelectedItem="{Binding selectedIndex}"
+                                Title="{Binding deviceDetails.pPosition}"/>
+                    </Grid>
+
+                    <Button Text="Speichern" Clicked="OnSetMBusDeviceDetails" Margin="0,4" />
+
+                    <Label Text="Kanalwerte" HorizontalOptions="Center" FontSize="Title" Margin="{OnIdiom Desktop='0,14', Phone='0,44'}" />
+
+                </VerticalStackLayout>
+
+            </DataTemplate>
+
+        </CollectionView.HeaderTemplate>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="services:MBusChannelData">
+                <Grid Padding="10,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.RowSpacing>5</Grid.RowSpacing>
+
+                    <Label Text="Name" />
+                    <Label Text="{Binding pName}" Grid.Column="1"/>
+
+                    <Label Text="Value" Grid.Row="1"/>
+                    <Label Text="{Binding pValue}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="Faktor" Grid.Row="2"/>
+                    <Label Text="{Binding pFactor}" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Berechnet" Grid.Row="3"/>
+                    <Label Text="{Binding pValueCalc}" Grid.Row="3" Grid.Column="1" />
+
+                    <Label Text="Einheit" Grid.Row="4"/>
+                    <Label Text="{Binding pUnit}" Grid.Row="4" Grid.Column="1" />
+
+                    <Label Text="DIF" Grid.Row="5"/>
+                    <Label Text="{Binding pDIF}" Grid.Row="5" Grid.Column="1" />
+
+                    <Label Text="VIF" Grid.Row="6"/>
+                    <Label Text="{Binding pVIF}" Grid.Row="6" Grid.Column="1" />
+
+                    <Label Text="TCP Register" Grid.Row="7"/>
+                    <Label Text="{Binding pModbusRegisterTCP}" Grid.Row="7" Grid.Column="1" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
 </ContentPage>

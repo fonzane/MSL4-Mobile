@@ -52,6 +52,31 @@ public class MBusService
         return mBusDeviceDetails;
     }
 
+    public async Task<List<MBusChannelData>> GetMBusChannelData(string ip, string sessionid, int pDBDeviceID)
+    {
+        Uri uri = new Uri($"http://{ip}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}");
+        List<MBusChannelData> mBusChannelData = null;
+
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                mBusChannelData = JsonSerializer.Deserialize<List<MBusChannelData>>(stringResponse);
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return mBusChannelData;
+    }
+
     public async Task<MBusDeviceDetails> SetMBusDeviceDetails(string ip, string sessionid, MBusDeviceDetails deviceDetails)
     {
         Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData");
@@ -176,6 +201,8 @@ public class MBusService
         }
         return indexData;
     }
+
+    
 
 	public async Task<MBusSearchResponse> InitializeMBusSearch(
 		string ip,
@@ -343,4 +370,24 @@ public class MBusDeviceDetails
     public int pDeviceAddress { get; set; }
     public string pPassword { get; set; }
     public string pSessionID { get; set; }
+}
+
+public class MBusChannelData
+{
+    public int pDBChannelNr { get; set; }
+    public string pDIF { get; set; }
+    public string pUnit { get; set; }
+    public int pModbusRegisterTCP { get; set; }
+    public string pValue { get; set; }
+    public double pFactor { get; set; }
+    public string pVIFE { get; set; }
+    public string pValueCalc { get; set; }
+    public string pName { get; set; }
+    public int pDBVisualTypeID { get; set; }
+    public int pChannelAddress { get; set; }
+    public string pVIF { get; set; }
+    public bool pActive { get; set; }
+    public bool pType { get; set; }
+    public int id { get; set; }
+    public string pDIFE { get; set; }
 }
