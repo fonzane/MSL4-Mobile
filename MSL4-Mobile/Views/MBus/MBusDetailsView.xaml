@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:MSL4_Mobile.Converters"
              xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             xmlns:local="clr-namespace:MSL4_Mobile.Views.MBus"
              x:Class="MSL4_Mobile.Views.MBus.MBusDetailsView"
              x:Name="page"
              Title="MBus Gerätedetails">
@@ -12,12 +13,13 @@
         <x:Int32 x:Key="TCP">3</x:Int32>
     </ContentPage.Resources>
 
+
     <CollectionView
         ItemsSource="{Binding channelData}"
         BindingContext="{x:Reference page}"
         Header="{Binding .}">
         <CollectionView.HeaderTemplate>
-            <DataTemplate>
+            <DataTemplate x:DataType="local:MBusDetailsView">
 
                 <VerticalStackLayout Padding="10,20">
 
@@ -117,7 +119,8 @@
                                 Title="{Binding deviceDetails.pPosition}"/>
                     </Grid>
 
-                    <Button Text="Speichern" Clicked="OnSetMBusDeviceDetails" Margin="0,4" />
+                    <!--<Button Text="Speichern" Clicked="OnSetMBusDeviceDetails" Margin="0,4" />-->
+                    <Button Text="Speichern" Command="{Binding OnSetMBusChannelData}" CommandParameter="2" Margin="0,4" />
 
                     <Label Text="Kanalwerte" HorizontalOptions="Center" FontSize="Title" Margin="{OnIdiom Desktop='0,14', Phone='0,44'}" />
 
@@ -142,23 +145,26 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Grid.RowSpacing>5</Grid.RowSpacing>
 
-                    <Label Text="Name" />
-                    <Label Text="{Binding pName}" Grid.Column="1"/>
+                    <Label Text="Name" VerticalOptions="Center" />
+                    <Entry Text="{Binding pName}" Grid.Column="1" Margin="-8,0"/>
 
                     <Label Text="Value" Grid.Row="1"/>
                     <Label Text="{Binding pValue}" Grid.Row="1" Grid.Column="1" />
 
-                    <Label Text="Faktor" Grid.Row="2"/>
-                    <Label Text="{Binding pFactor}" Grid.Row="2" Grid.Column="1" />
+                    <Label Text="Faktor" Grid.Row="2" VerticalOptions="Center"/>
+                    <Entry Text="{Binding pFactor}" Grid.Row="2" Grid.Column="1" Margin="-8,0" />
 
                     <Label Text="Berechnet" Grid.Row="3"/>
                     <Label Text="{Binding pValueCalc}" Grid.Row="3" Grid.Column="1" />
 
-                    <Label Text="Einheit" Grid.Row="4"/>
-                    <Label Text="{Binding pUnit}" Grid.Row="4" Grid.Column="1" />
+                    <Label Text="Einheit" Grid.Row="4" VerticalOptions="Center"/>
+                    <Picker Grid.Row="4" Grid.Column="1" Margin="-8,0"
+                            Title="{Binding pUnit}"
+                            ItemsSource="{Binding unitData.values}"/>
 
                     <Label Text="DIF" Grid.Row="5"/>
                     <Label Text="{Binding pDIF}" Grid.Row="5" Grid.Column="1" />
@@ -168,6 +174,8 @@
 
                     <Label Text="TCP Register" Grid.Row="7"/>
                     <Label Text="{Binding pModbusRegisterTCP}" Grid.Row="7" Grid.Column="1" />
+
+                    <Button Text="Speichern" Command="{Binding BindingContext.OnSetMBusChannelData, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding id}" HorizontalOptions="Center" Grid.Row="8" Grid.ColumnSpan="2" Margin="0,6"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

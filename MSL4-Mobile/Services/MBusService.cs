@@ -77,6 +77,34 @@ public class MBusService
         return mBusChannelData;
     }
 
+    public async void SetMBusChannelData(string ip, string sessionid, int pDBDeviceID, MBusChannelData channelData)
+    {
+        Uri uri = new Uri($"http://{ip}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}/{channelData.id}");
+
+        try
+        {
+            string json = JsonSerializer.Serialize<MBusChannelData>(channelData, serializerOptions);
+            Console.WriteLine(json.ToString());
+            StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            Console.WriteLine(content.ToString());
+
+            HttpResponseMessage response = await client.PutAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Response " + stringResponse);
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+    }
+
     public async Task<MBusDeviceDetails> SetMBusDeviceDetails(string ip, string sessionid, MBusDeviceDetails deviceDetails)
     {
         Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData");
@@ -260,6 +288,37 @@ public class MBusService
         }
         return searchResponse;
     }
+
+    public async Task<UnitData> GetUnitData(string ip, string sessionid)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
+        UnitData unitResponse = null;
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                unitResponse = JsonSerializer.Deserialize<UnitData>(stringResponse);
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return unitResponse;
+
+    }
+}
+
+public record UnitData
+{
+    public List<string> values { get; init; }
+    public List<string> options { get; init; }
 }
 
 public readonly struct DataStruct
@@ -390,4 +449,5 @@ public class MBusChannelData
     public bool pType { get; set; }
     public int id { get; set; }
     public string pDIFE { get; set; }
+    public UnitData unitData { get; set; }
 }

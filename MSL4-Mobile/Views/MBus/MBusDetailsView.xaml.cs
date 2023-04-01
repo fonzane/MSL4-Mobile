@@ -1,10 +1,12 @@
 ﻿using MSL4_Mobile.Services;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace MSL4_Mobile.Views.MBus;
 
 public partial class MBusDetailsView : ContentPage
 {
+	public int deviceID { get; set; }
 	public MBusService mBusService { get; }
 
 	public List<ComDataResponse.ComData> comData { get; set; }
@@ -18,6 +20,9 @@ public partial class MBusDetailsView : ContentPage
 
 	public MBusDeviceDetails deviceDetails { get; set; }
 	public List<MBusChannelData> channelData { get; set; }
+	public UnitData unitData { get; set; }
+
+	public ICommand OnSetMBusChannelData { get; private set; }
 
 	public enum PortTypes
 	{
@@ -32,7 +37,8 @@ public partial class MBusDetailsView : ContentPage
 		ComDataResponse.ComData selectedCom,
 		DataStruct selectedBaud)
 	{
-		this.comData = comData; this.baudData = baudData; this.selectedCom = selectedCom; this.selectedBaud = selectedBaud;
+		this.comData = comData; this.baudData = baudData; this.selectedCom = selectedCom; this.selectedBaud = selectedBaud; this.deviceID = deviceID;
+		OnSetMBusChannelData = new Command<int>((int channelID) => SetMBusChannelData(channelID));
 
 		InitializeComponent();
 		mBusService = new MBusService();
@@ -70,7 +76,17 @@ public partial class MBusDetailsView : ContentPage
 	{
 		channelData = await mBusService.GetMBusChannelData(AuthService.ipaddress, AuthService.sessionid, deviceID);
 		OnPropertyChanged(nameof(channelData));
+        GetUnitData();
+    }
 
+    private async void GetUnitData()
+	{
+		unitData = await mBusService.GetUnitData(AuthService.ipaddress, AuthService.sessionid);
+		foreach(MBusChannelData channel in channelData)
+		{
+			channel.unitData = unitData;
+		}
+		OnPropertyChanged(nameof(channelData));
 	}
 
     async void OnSetMBusDeviceDetails(System.Object sender, System.EventArgs e)
@@ -101,5 +117,12 @@ public partial class MBusDetailsView : ContentPage
 		{
 			Console.WriteLine("Error fetching MBusIndexData (response is null)...");
 		}
+	}
+
+	private void SetMBusChannelData(int channelID)
+	{
+		MBusChannelData selectedChannel = channelData.FirstOrDefault(c => c.id == channelID);
+		mBusService.SetMBusChannelData(AuthService.ipaddress, AuthService.sessionid, channelID, selectedChannel);
+		GetChannelData(this.deviceID);
 	}
 }
