@@ -5,17 +5,28 @@
              x:Name="page"
              x:Class="MSL4_Mobile.Views.Status.StatusView"
              Title="Statusübersicht">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="GridStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="0,2" />
+                <Setter Property="HeightRequest" Value="26" />
+                <Setter Property="ColumnDefinitions" Value="*,*" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
         <Label Text="Allgemeine Einstellungen" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
-        <Grid ColumnDefinitions="*,*" Margin="0,2">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Türkontakt" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}"  HeightRequest="24"/>
-                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" HeightRequest="24" />
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}" />
+                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" />
                 <Label Text="{Binding statusData.tuerkontakt}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,2">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Versorgung" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
                 <Image Source="ballyellow.png" IsVisible="{Binding statusDatal}" HeightRequest="24"/>
@@ -24,64 +35,64 @@
                 <Label Text="Netzbetrieb" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="MAC" />
             <Label Text="{Binding statusData.mac}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Lan IP" />
             <Label Text="{Binding statusData.lanip}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="WLAN IP" />
             <Label Text="{Binding statusData.wlanip}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="VPN IP" />
             <Label Text="{Binding statusData.vpnip}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Zertifikat" />
             <Label Text="{Binding statusData.zertifikat}" Grid.Column="1" />
         </Grid>
         <Label Grid.ColumnSpan="2" Text="Hardware Statistiken" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Temperatur" />
             <HorizontalStackLayout Grid.Column="1">
                 <Label Text="{Binding statusData.temperatur}" />
                 <Label Text="°C" />
             </HorizontalStackLayout>
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="CPU avg." />
             <Label Text="{Binding statusData.percentcpu}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="RAM frei" />
             <Label Text="{Binding statusData.memavailable}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="RAM ges." />
             <Label Text="{Binding statusData.memtotal}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Freier Speicher" />
             <Label Text="{Binding statusData.spacefree}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Speicher ges." />
             <Label Text="{Binding statusData.spacetotal}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Swap frei" />
             <Label Text="{Binding statusData.swapfree}" Grid.Column="1" />
         </Grid>
-        <Grid ColumnDefinitions="*,*" Margin="0,4">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Swap ges." />
             <Label Text="{Binding statusData.swaptotal}" Grid.Column="1" />
         </Grid>
         <Label Grid.ColumnSpan="2" Text="Modem Statistiken" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
-        <Grid ColumnDefinitions="*,*" Margin="0,2">
+        <Grid Style="{StaticResource GridStyle}">
             <Label Text="Modem" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
                 <Image Source="ballgreen.png" IsVisible="{Binding statusData.pModemActive}" HeightRequest="24" />
