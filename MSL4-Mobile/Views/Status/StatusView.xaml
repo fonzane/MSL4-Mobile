@@ -84,8 +84,8 @@
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Modem" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballgreen.png" IsVisible="{Binding statusData.pModemActive}" />
-                <Image Source="ballred.png" IsVisible="{Binding statusData.pModemActive, Converter={services:InvertBool}}" />
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.pModemActive}" HeightRequest="24" />
+                <Image Source="ballred.png" IsVisible="{Binding statusData.pModemActive, Converter={services:InvertBool}}" HeightRequest="24" />
                 <Label Text="Aktiv" IsVisible="{Binding statusData.pModemActive}" VerticalOptions="Center"/>
                 <Label Text="Nicht aktiv" IsVisible="{Binding statusData.pModemActive, Converter={services:InvertBool}}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
