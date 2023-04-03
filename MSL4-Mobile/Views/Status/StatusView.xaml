@@ -6,21 +6,21 @@
              x:Class="MSL4_Mobile.Views.Status.StatusView"
              Title="Statusübersicht">
     <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
-        <Label Grid.ColumnSpan="2" Text="Allgemeine Einstellungen" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
+        <Label Text="Allgemeine Einstellungen" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Türkontakt" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}" />
-                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" />
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}"  HeightRequest="24"/>
+                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" HeightRequest="24" />
                 <Label Text="{Binding statusData.tuerkontakt}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Versorgung" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballyellow.png" IsVisible="{Binding statusData.stromausfall}" />
+                <Image Source="ballyellow.png" IsVisible="{Binding statusDatal}" HeightRequest="24"/>
                 <Label Text="Akkubetrieb" IsVisible="{Binding statusData.stromausfall}" VerticalOptions="Center"/>
-                <Image Source="ballgreen.png" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" />
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}"  HeightRequest="24"/>
                 <Label Text="Netzbetrieb" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>
