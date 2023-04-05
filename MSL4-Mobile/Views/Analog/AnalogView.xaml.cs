@@ -45,9 +45,10 @@ public partial class AnalogView : ContentPage
 		return;
 	}
 
-    public async void OnSelectAnalogInput(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+    async void OnSelectAnalogInput(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
     {
-		await Navigation.PushAsync(new Analog.AnalogDetailsView(e.SelectedItem as AnalogInput));
+		Console.WriteLine("Hellooo");
+		await Navigation.PushAsync(new Analog.AnalogDetailsView(e.CurrentSelection.FirstOrDefault() as AnalogInput));
 		if(DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
 		{
 			(sender as ListView).SelectedItem = null;

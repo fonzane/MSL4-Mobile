@@ -6,66 +6,93 @@
              x:Name="page"
              Title="Analoge Kanäle">
 
-    <VerticalStackLayout Spacing="20" Margin="0,20,0,0" BindingContext="{x:Reference page}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CollectionGridStyle" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='2*,*'}" />
+                <Setter Property="RowDefinitions" Value="{OnIdiom auto, Phone='auto,auto'}" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+            <Style x:Key="HorizontalStackStyle" TargetType="HorizontalStackLayout">
+                <Setter Property="HeightRequest" Value="30"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <ListView
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+
+        <CollectionView
             ItemsSource="{Binding analogInputs}"
             SelectionMode="Single"
-            HeightRequest="{OnIdiom Desktop='auto', Phone=260}"
-            ItemSelected="OnSelectAnalogInput">
-            <ListView.Header>
-                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
-                    <Label Text="Eingänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
-                    <!--<Label Text="Zum Bearbeiten anklicken" VerticalOptions="Center" Grid.Column="2" Grid.Row="0" />-->
-                    <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
-                    <Label Text="Typ" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
-                    <Label Text="Wert" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
-                    <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+            SelectionChanged="OnSelectAnalogInput">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*" HeightRequest="40">
+                    <Label Text="Eingänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
                 </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="services:AnalogInput">
-                    <ViewCell>
-                        <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
-                            <Label Text="{Binding pName}" Grid.Column="0"/>
-                            <Label Text="{Binding pAnalogType}" Grid.Column="1"/>
-                            <HorizontalStackLayout Grid.Column="2">
-                                <Label Text="{Binding pValue}"/>
-                                <Label Text="{Binding pUnit}"/>
-                            </HorizontalStackLayout>
-                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    <Grid Style="{x:StaticResource CollectionGridStyle}">
+                        <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Name: " />
+                            <Label Text="{Binding pName}"/>
+                        </HorizontalStackLayout>
 
-        <ListView ItemsSource="{Binding analogOutputs}" SelectionMode="Single" HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
-            <ListView.Header>
-                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
-                    <Label Text="Ausgänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
-                    <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
-                    <Label Text="Typ" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
-                    <Label Text="Wert" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
-                    <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+                        <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Typ: " />
+                            <Label Text="{Binding pAnalogType}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Wert: " />
+                            <Label Text="{Binding pValue}"/>
+                            <Label Text="{Binding pUnit}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Logging: "/>
+                            <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CollectionView
+            ItemsSource="{Binding analogOutputs}"
+            SelectionMode="Single">
+            <CollectionView.Header>
+                <Grid ColumnDefinitions="*" HeightRequest="40">
+                    <Label Text="Ausgänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
                 </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="services:AnalogOutput">
-                    <ViewCell>
-                        <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
-                            <Label Text="{Binding pName}" Grid.Column="0"/>
-                            <Label Text="{Binding pAnalogType}" Grid.Column="1"/>
-                            <HorizontalStackLayout Grid.Column="2">
-                                <Label Text="{Binding pValueAnalog}"/>
-                                <Label Text="{Binding pValuePower}"/>
-                            </HorizontalStackLayout>
-                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    <Grid Style="{x:StaticResource CollectionGridStyle}">
+                        <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Name: " />
+                            <Label Text="{Binding pName}"/>
+                        </HorizontalStackLayout>
 
-    </VerticalStackLayout>
+                        <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Typ: " />
+                            <Label Text="{Binding pAnalogType}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Wert: " />
+                            <Label Text="{Binding pValueAnalog}"/>
+                            <Label Text="{Binding pValuePower}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Logging: "/>
+                            <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </FlexLayout>
 </ContentPage>
