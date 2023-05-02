@@ -6,28 +6,43 @@
              xmlns:services="clr-namespace:MSL4_Mobile.Services"
              Title="Digitale Kanäle">
 
-    <VerticalStackLayout Spacing="20" Margin="0,20,0,0" BindingContext="{x:Reference page}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CollectionGridStyle" TargetType="Grid">
+                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='2*,*'}" />
+                <Setter Property="RowDefinitions" Value="{OnIdiom auto, Phone='auto,auto'}" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+            <Style x:Key="HorizontalStackStyle" TargetType="HorizontalStackLayout">
+                <Setter Property="HeightRequest" Value="30"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <CollectionView
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}">
+
+        <CollectionView Margin="0,5"
             ItemsSource="{Binding digitalInputs}"
             SelectionMode="Single"
-            HeightRequest="{OnIdiom Desktop='auto', Phone=260}"
             SelectionChanged="OnSelectDigitalInput">
 
             <CollectionView.Header>
-                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
+                <!--<Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
                     <Label Text="Eingänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
                     <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                     <Label Text="Typ" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
                     <Label Text="Status" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
                     <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+                </Grid>-->
+                <Grid ColumnDefinitions="*" HeightRequest="40">
+                    <Label Text="Eingänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
                 </Grid>
             </CollectionView.Header>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="services:DigitalInput">
 
-                    <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
+                    <!--<Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
                         <Label Text="{Binding pName}" Grid.Column="0"/>
                         <Label Text="{Binding pDigitalType}" Grid.Column="1"/>
                         <HorizontalStackLayout Grid.Column="2">
@@ -36,40 +51,90 @@
                             <Label Text="{Binding pValueText}" />
                         </HorizontalStackLayout>
                         <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
+                    </Grid>-->
+
+                    <Grid Style="{x:StaticResource CollectionGridStyle}">
+                        <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Name: " />
+                            <Label Text="{Binding pName}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Typ: " />
+                            <Label Text="{Binding pDigitalType}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Status: " />
+                            <Image Source="ballgreen" IsVisible="{Binding pValue}" HeightRequest="24"/>
+                            <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}" HeightRequest="24"/>
+                            <Label Text="{Binding pValueText}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Logging: "/>
+                            <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
+                        </HorizontalStackLayout>
                     </Grid>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <ListView ItemsSource="{Binding digitalOutputs}" SelectionMode="None" HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
-            <ListView.Header>
-                <Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
+        <CollectionView
+            ItemsSource="{Binding digitalOutputs}"
+            SelectionMode="None"
+            HeightRequest="{OnIdiom Desktop='auto', Phone=260}">
+            <CollectionView.Header>
+                <!--<Grid ColumnDefinitions="4*,4*,2*,2*" RowDefinitions="40,30" RowSpacing="5">
                     <Label Text="Ausgänge" Grid.ColumnSpan="4"  Grid.Row="0" HorizontalOptions="Center" FontSize="24"/>
                     <Label Text="Name" FontAttributes="Bold" Grid.Column="0" Grid.Row="1"/>
                     <Label Text="Beschreibung" FontAttributes="Bold" Grid.Column="1" Grid.Row="1"/>
                     <Label Text="Status" FontAttributes="Bold" Grid.Column="2" Grid.Row="1"/>
                     <Label Text="Logging" FontAttributes="Bold" Grid.Column="3" Grid.Row="1"/>
+                </Grid>-->
+                <Grid ColumnDefinitions="*" HeightRequest="40">
+                    <Label Text="Ausgänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
                 </Grid>
-            </ListView.Header>
-            <ListView.ItemTemplate>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="services:DigitalOutput">
-                    <ViewCell>
-                        <Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
-                            <Label Text="{Binding pName}" Grid.Column="0"/>
-                            <Label Text="{Binding pDescription}" Grid.Column="1"/>
-                            <HorizontalStackLayout Grid.Column="2">
-                                <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
-                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
-                                <Label Text="{Binding pDescription}" />
-                            </HorizontalStackLayout>
-                            <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    <!--<Grid ColumnDefinitions="4*,4*,2*,2*" HeightRequest="20">
+                        <Label Text="{Binding pName}" Grid.Column="0"/>
+                        <Label Text="{Binding pDescription}" Grid.Column="1"/>
+                        <HorizontalStackLayout Grid.Column="2">
+                            <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
+                            <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
+                            <Label Text="{Binding pDescription}" />
+                        </HorizontalStackLayout>
+                        <CheckBox HorizontalOptions="Start" IsChecked="{Binding pActive}" IsEnabled="False" Grid.Column="3"/>
+                    </Grid>-->
+                    <Grid Style="{x:StaticResource CollectionGridStyle}">
+                        <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Name: " />
+                            <Label Text="{Binding pName}"/>
+                        </HorizontalStackLayout>
 
-    </VerticalStackLayout>
+                        <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Beschreibung: " />
+                            <Label Text="{Binding pDescription}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Status: " />
+                            <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
+                            <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                            <Label Text="Logging: "/>
+                            <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </FlexLayout>
 
 </ContentPage>

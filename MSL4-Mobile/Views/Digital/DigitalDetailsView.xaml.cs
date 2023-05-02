@@ -4,6 +4,7 @@ namespace MSL4_Mobile.Views.Digital;
 
 public partial class DigitalDetailsView : ContentPage
 {
+    private ChannelService channelService;
 	public DigitalInput digitalInput { get; set; }
 
     public List<string> DigitalTypes { get; } = new List<string>()
@@ -15,6 +16,7 @@ public partial class DigitalDetailsView : ContentPage
 
 	public DigitalDetailsView(DigitalInput digitalInput)
 	{
+        channelService = new ChannelService();
 		this.digitalInput = digitalInput;
 		channelType = DigitalTypes.FirstOrDefault(t => t == digitalInput.pDigitalType);
 		InitializeComponent();
@@ -23,7 +25,7 @@ public partial class DigitalDetailsView : ContentPage
     async void OnSetChannelData(System.Object sender, System.EventArgs e)
     {
         Console.WriteLine(digitalInput.pDigitalType);
-        bool response = await ChannelService.SetDigitalInput(AuthService.ipaddress, AuthService.sessionid, digitalInput);
+        bool response = await channelService.SetDigitalInput(AuthService.ipaddress, AuthService.sessionid, digitalInput);
         if (response)
         {
             await Navigation.PopToRootAsync();

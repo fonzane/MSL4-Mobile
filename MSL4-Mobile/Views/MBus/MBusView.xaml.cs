@@ -6,7 +6,6 @@ namespace MSL4_Mobile.Views.MBus;
 public partial class MBusView : ContentPage
 {
 	private Timer timer;
-	private int invokeCount = 0;
 	private string searchInitTimestamp;
 	private MBusService mBusService;
 

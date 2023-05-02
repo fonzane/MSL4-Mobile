@@ -19,9 +19,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}">
 
-        <CollectionView
+        <CollectionView Margin="0,5"
             ItemsSource="{Binding analogInputs}"
             SelectionMode="Single"
             SelectionChanged="OnSelectAnalogInput">
@@ -58,7 +58,8 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <CollectionView
+
+        <CollectionView Margin="0,5"
             ItemsSource="{Binding analogOutputs}"
             SelectionMode="Single">
             <CollectionView.Header>
@@ -95,4 +96,7 @@
         </CollectionView>
 
     </FlexLayout>
+
+
+
 </ContentPage>

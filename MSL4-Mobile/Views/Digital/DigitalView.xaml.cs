@@ -7,12 +7,15 @@ namespace MSL4_Mobile.Views;
 
 public partial class DigitalView : ContentPage
 {
+	private ChannelService channelService;
+
 	public ObservableCollection<DigitalInput> digitalInputs { get; }
 	public ObservableCollection<DigitalOutput> digitalOutputs { get;  }
 
 	public DigitalView()
 	{
 		InitializeComponent();
+		channelService = new ChannelService();
 
 		digitalInputs = new ObservableCollection<DigitalInput>();
 		digitalOutputs = new ObservableCollection<DigitalOutput>();
@@ -29,7 +32,7 @@ public partial class DigitalView : ContentPage
 	private async void GetDigitalInputs()
 	{
 		Console.WriteLine("Getting Digital Inputs.");
-		List<DigitalInput> digitalInputs = await ChannelService.GetDigitalInputs(AuthService.ipaddress, AuthService.sessionid);
+		List<DigitalInput> digitalInputs = await channelService.GetDigitalInputs(AuthService.ipaddress, AuthService.sessionid);
 		this.digitalInputs.Clear();
 		digitalInputs.ForEach(d => this.digitalInputs.Add(d));
 		OnPropertyChanged(nameof(digitalInputs));
@@ -39,7 +42,7 @@ public partial class DigitalView : ContentPage
 	private async void GetDigitalOutputs()
 	{
 		Console.WriteLine("Getting Digital Outputs.");
-		List<DigitalOutput> digitalOutputs = await ChannelService.GetDigitalOutputs(AuthService.ipaddress, AuthService.sessionid);
+		List<DigitalOutput> digitalOutputs = await channelService.GetDigitalOutputs(AuthService.ipaddress, AuthService.sessionid);
 		this.digitalOutputs.Clear();
 		digitalOutputs.ForEach(d => this.digitalOutputs.Add(d));
 		OnPropertyChanged(nameof(digitalOutputs));

@@ -1,18 +1,18 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.26" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/Analog/AnalogView.xaml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/Digital/DigitalView.xaml">
     <Files>
-      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml" Line="1" Column="1" />
-      <File FileName="MSL4-Mobile/Views/Analog/AnalogView.xaml" Line="38" Column="15" />
-      <File FileName="MSL4-Mobile/Views/Analog/AnalogView.xaml.cs" Line="56" Column="6" />
+      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml" />
+      <File FileName="MSL4-Mobile/Views/Digital/DigitalDetailsView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Views/Digital/DigitalView.xaml" Line="127" Column="49" />
     </Files>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

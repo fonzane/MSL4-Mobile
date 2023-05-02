@@ -5,13 +5,19 @@ namespace MSL4_Mobile.Services;
 
 public class ChannelService
 {
-	private static HttpClient client = new HttpClient();
-	private static JsonSerializerOptions serializerOptions = new JsonSerializerOptions
-	{
-		Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-	};
+	private HttpClient client;
+	private JsonSerializerOptions serializerOptions;
 
-	public async static Task<List<DigitalInput>> GetDigitalInputs(string ip, string sessionid)
+	public ChannelService()
+	{
+		client = new HttpClient();
+		serializerOptions = new JsonSerializerOptions
+		{
+			Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+		};
+    }
+
+	public async Task<List<DigitalInput>> GetDigitalInputs(string ip, string sessionid)
 	{
 		Uri uri = new Uri($"http://{ip}/RestDigitalIn/{sessionid}/");
 		List<DigitalInput> digitalInputChannelData = new List<DigitalInput>();
@@ -35,7 +41,7 @@ public class ChannelService
 		return digitalInputChannelData;
 	}
 
-    public async static Task<bool> SetDigitalInput(string ip, string sessionid, DigitalInput channel)
+    public async Task<bool> SetDigitalInput(string ip, string sessionid, DigitalInput channel)
     {
         Uri uri = new Uri($"http://{ip}/RestDigitalIn/{sessionid}/{channel.id.ToString()}");
 
@@ -64,7 +70,7 @@ public class ChannelService
         }
     }
 
-    public async static Task<List<DigitalOutput>> GetDigitalOutputs(string ip, string sessionid)
+    public async Task<List<DigitalOutput>> GetDigitalOutputs(string ip, string sessionid)
 	{
 		Uri uri = new Uri($"http://{ip}/RestDigitalOut/{sessionid}/");
 		List<DigitalOutput> digitalOutputChannelData = new List<DigitalOutput>();
@@ -89,7 +95,7 @@ public class ChannelService
 		return digitalOutputChannelData;
 	}
 
-    public async static Task<List<AnalogInput>> GetAnalogInputs(string ip, string sessionid)
+    public async Task<List<AnalogInput>> GetAnalogInputs(string ip, string sessionid)
     {
         Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/");
         List<AnalogInput> analogInputs = new List<AnalogInput>();
@@ -114,7 +120,7 @@ public class ChannelService
         return analogInputs;
     }
 
-	public async static Task<bool> SetAnalogInput(string ip, string sessionid, AnalogInput channel)
+	public async Task<bool> SetAnalogInput(string ip, string sessionid, AnalogInput channel)
 	{
 		Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/{channel.id.ToString()}");
 
@@ -142,7 +148,7 @@ public class ChannelService
         }
 	}
 
-	public async static Task<List<AnalogOutput>> GetAnalogOutputs(string ip, string sessionid)
+	public async Task<List<AnalogOutput>> GetAnalogOutputs(string ip, string sessionid)
 	{
         Uri uri = new Uri($"http://{ip}/RestAnalogOut/{sessionid}/");
         List<AnalogOutput> analogOutputs = new List<AnalogOutput>();

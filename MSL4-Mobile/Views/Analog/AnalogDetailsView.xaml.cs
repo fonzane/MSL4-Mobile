@@ -4,6 +4,7 @@ namespace MSL4_Mobile.Views.Analog;
 
 public partial class AnalogDetailsView : ContentPage
 {
+    private ChannelService channelService;
 	public AnalogInput analogInput { get; set; }
 
 	public List<string> Units { get; } = new List<string>()
@@ -30,6 +31,7 @@ public partial class AnalogDetailsView : ContentPage
 
     public AnalogDetailsView(AnalogInput analogInput)
 	{
+        channelService = new ChannelService();
 		this.analogInput = analogInput;
         channelType = AnalogTypes.FirstOrDefault(t => (int)t.Value == analogInput.pAnalogType);
 		InitializeComponent();
@@ -37,7 +39,7 @@ public partial class AnalogDetailsView : ContentPage
 
     async void OnSetChannelData(System.Object sender, System.EventArgs e)
     {
-        bool response = await ChannelService.SetAnalogInput(AuthService.ipaddress, AuthService.sessionid, analogInput);
+        bool response = await channelService.SetAnalogInput(AuthService.ipaddress, AuthService.sessionid, analogInput);
         if (response)
         {
             // ToDo: Need to find a way to refresh AnalogView after setting channel data
