@@ -11,7 +11,10 @@ public partial class AnalogView : ContentPage
 	public ObservableCollection<AnalogInput> analogInputs { get; }
 	public ObservableCollection<AnalogOutput> analogOutputs { get; }
 
-	public AnalogView()
+	public int analogInputsHeight { get; set; }
+	public int analogOutputsHeight { get; set; }
+
+    public AnalogView()
 	{
 		InitializeComponent();
 		channelService = new ChannelService();
@@ -35,7 +38,13 @@ public partial class AnalogView : ContentPage
 		this.analogInputs.Clear();
 		analogInputs.ForEach(a => this.analogInputs.Add(a));
 		OnPropertyChanged(nameof(this.analogInputs));
-		return;
+
+        if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+            analogInputsHeight = analogInputs.Count * 60;
+        else
+            analogInputsHeight = analogInputs.Count * 90;
+        OnPropertyChanged(nameof(analogInputsHeight));
+        return;
 	}
 
 	private async void GetAnalogOutputs()
@@ -45,7 +54,13 @@ public partial class AnalogView : ContentPage
 		this.analogOutputs.Clear();
 		analogOutputs.ForEach(a => this.analogOutputs.Add(a));
 		OnPropertyChanged(nameof(this.analogOutputs));
-		return;
+
+        if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+            analogOutputsHeight = analogOutputs.Count * 60;
+        else
+            analogOutputsHeight = analogOutputs.Count * 90;
+        OnPropertyChanged(nameof(analogOutputsHeight));
+        return;
 	}
 
     async void OnSelectAnalogInput(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)

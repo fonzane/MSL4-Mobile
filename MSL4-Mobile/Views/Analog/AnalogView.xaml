@@ -24,7 +24,8 @@
         <CollectionView Margin="0,5"
             ItemsSource="{Binding analogInputs}"
             SelectionMode="Single"
-            SelectionChanged="OnSelectAnalogInput">
+            SelectionChanged="OnSelectAnalogInput"
+            HeightRequest="{Binding analogInputsHeight}">
             <CollectionView.Header>
                 <Grid ColumnDefinitions="*" HeightRequest="40">
                     <Label Text="Eingänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
@@ -61,7 +62,8 @@
 
         <CollectionView Margin="0,5"
             ItemsSource="{Binding analogOutputs}"
-            SelectionMode="Single">
+            SelectionMode="Single"
+            HeightRequest="{Binding analogOutputsHeight}">
             <CollectionView.Header>
                 <Grid ColumnDefinitions="*" HeightRequest="40">
                     <Label Text="Ausgänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>

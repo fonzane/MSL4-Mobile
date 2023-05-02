@@ -10,7 +10,10 @@ public partial class DigitalView : ContentPage
 	private ChannelService channelService;
 
 	public ObservableCollection<DigitalInput> digitalInputs { get; }
-	public ObservableCollection<DigitalOutput> digitalOutputs { get;  }
+	public ObservableCollection<DigitalOutput> digitalOutputs { get; }
+
+	public int digitalInputsHeight { get; set; }
+	public int digitalOutputsHeight { get; set; }
 
 	public DigitalView()
 	{
@@ -36,7 +39,13 @@ public partial class DigitalView : ContentPage
 		this.digitalInputs.Clear();
 		digitalInputs.ForEach(d => this.digitalInputs.Add(d));
 		OnPropertyChanged(nameof(digitalInputs));
-		return;
+
+		if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+			digitalInputsHeight = digitalInputs.Count * 60;
+		else
+			digitalInputsHeight = digitalInputs.Count * 90;
+		OnPropertyChanged(nameof(digitalInputsHeight));
+        return;
 	}
 
 	private async void GetDigitalOutputs()
@@ -46,15 +55,22 @@ public partial class DigitalView : ContentPage
 		this.digitalOutputs.Clear();
 		digitalOutputs.ForEach(d => this.digitalOutputs.Add(d));
 		OnPropertyChanged(nameof(digitalOutputs));
-		return;
+
+        if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
+            digitalOutputsHeight = digitalOutputs.Count * 60;
+        else
+            digitalOutputsHeight = digitalOutputs.Count * 90;
+        OnPropertyChanged(nameof(digitalOutputsHeight));
+        return;
 	}
 
-    async void OnSelectDigitalInput(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+    async void OnSelectDigitalInput(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
     {
-		await Navigation.PushAsync(new Digital.DigitalDetailsView(e.SelectedItem as DigitalInput));
-        if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
-        {
-            (sender as ListView).SelectedItem = null;
-        }
+        Console.WriteLine("Navigating Digital Input");
+        await Navigation.PushAsync(new Digital.DigitalDetailsView(e.CurrentSelection.FirstOrDefault() as DigitalInput));
+   //     if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+   //     {
+			//e.CurrentSelection = null;
+   //     }
     }
 }
