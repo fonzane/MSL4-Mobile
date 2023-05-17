@@ -4,7 +4,7 @@
              x:Class="MSL4_Mobile.MainPage"
              x:Name="page">
 
-    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,40">
         <Grid ColumnDefinitions="*,*" Margin="0,2">
             <Label Text="Name:" VerticalOptions="Center"/>
             <Entry Text="{Binding mSL4Data.pName}" Grid.Column="1" />

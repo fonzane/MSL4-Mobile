@@ -57,9 +57,9 @@ public partial class DigitalView : ContentPage
 		OnPropertyChanged(nameof(digitalOutputs));
 
         if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
-            digitalOutputsHeight = digitalOutputs.Count * 60;
+            digitalOutputsHeight = digitalOutputs.Count * 60 + 40;
         else
-            digitalOutputsHeight = digitalOutputs.Count * 90;
+            digitalOutputsHeight = digitalOutputs.Count * 90 + 40;
         OnPropertyChanged(nameof(digitalOutputsHeight));
         return;
 	}
@@ -68,9 +68,33 @@ public partial class DigitalView : ContentPage
     {
         Console.WriteLine("Navigating Digital Input");
         await Navigation.PushAsync(new Digital.DigitalDetailsView(e.CurrentSelection.FirstOrDefault() as DigitalInput));
-   //     if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
-   //     {
-			//e.CurrentSelection = null;
-   //     }
+        if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+        {
+			(sender as CollectionView).SelectedItem = null;
+        }
+    }
+
+    void OnSelectDigitalOutput(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
+    {
+		Console.WriteLine((e.CurrentSelection.FirstOrDefault() as DigitalOutput).modified);
+		(e.CurrentSelection.FirstOrDefault() as DigitalOutput).modified = true;
+        Console.WriteLine((e.CurrentSelection.FirstOrDefault() as DigitalOutput).modified);
+    }
+
+    async void OnSaveDigitalOutputs(System.Object sender, System.EventArgs e)
+    {
+		foreach (DigitalOutput channel in digitalOutputs)
+		{
+			bool response = await channelService.SetDigitalOutput(AuthService.ipaddress, AuthService.sessionid, channel);
+			if (response)
+			{
+				await Navigation.PopToRootAsync();
+			}
+			else
+			{
+				Console.WriteLine("Error setting channel data.");
+				await DisplayAlert("Error", "Couldn't set data for digital output " + channel.pName, "OK");
+			}
+        }
     }
 }

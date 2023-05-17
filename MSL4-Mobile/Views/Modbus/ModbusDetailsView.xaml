@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:MSL4_Mobile.Converters"
+             x:Class="MSL4_Mobile.Views.Modbus.ModbusDetailsView"
+             x:Name="page"
+             Title="Modbus Geräteeinstellungen">
+
+    <ContentPage.Resources>
+        <x:Int32 x:Key="Serial">1</x:Int32>
+        <x:Int32 x:Key="TCP">3</x:Int32>
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <Grid BindingContext="{x:Reference page}" Padding="10">
+            <Grid.RowSpacing>10</Grid.RowSpacing>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Label Text="Kennzeichnung" />
+            <Entry Text="{Binding modbusDevice.pName}" Grid.Column="1"/>
+
+            <Label Text="Erstellungsdatum" Grid.Row="1" />
+            <Entry Text="{Binding modbusDevice.pTimestamp}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" />
+
+            <Label Text="Aktiv" Grid.Row="2" VerticalTextAlignment="Start"/>
+            <CheckBox IsChecked="{Binding modbusDevice.pActive}" Grid.Row="2" Grid.Column="1" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start"/>
+
+            <Label Text="Erfassungsperiode" Grid.Row="3" />
+            <Picker Title="{Binding modbusDevice.pPeriod}" Grid.Row="3" Grid.Column="1" />
+
+            <Label Text="Hersteller" Grid.Row="4" />
+            <Entry Text="{Binding modbusDevice.pManufacturer}" Grid.Row="4" Grid.Column="1" />
+
+            <Label Text="Geräteadresse" Grid.Row="5" />
+            <Entry Text="{Binding modbusDevice.pDeviceAddress}" Grid.Row="5" Grid.Column="1" />
+
+            <Label Text="Verbindungsart" Grid.Row="6" />
+            <Grid ColumnDefinitions="*,*" Grid.Row="6" Grid.Column="1">
+                <RadioButton Content="Seriell" IsChecked="{Binding modbusDevice.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource Serial}}" />
+                <RadioButton Content="TCP" IsChecked="{Binding modbusDevice.pPortType, Converter={converters:PortTypeBoolConverter}, ConverterParameter={StaticResource TCP}}" Grid.Column="1"/>
+            </Grid>
+
+            <Label Text="Schnittstelle" Grid.Row="7" />
+            <Picker Title="Auswahl" Grid.Row="7" Grid.Column="1" />
+
+            <Label Text="Baud" Grid.Row="8" />
+            <Picker Title="{Binding modbusDevice.pBaud}" Grid.Row="8" Grid.Column="1" />
+
+            <Label Text="Parität" Grid.Row="9" />
+            <Picker Title="{Binding modbusDevice.pParity}" Grid.Row="9" Grid.Column="1" />
+
+            <Label Text="Stop Bits" Grid.Row="10" />
+            <Picker Title="{Binding modbusDevice.pStopBits}" Grid.Row="10" Grid.Column="1" />
+
+            <Label Text="Beschreibung" Grid.Row="11" />
+            <Entry Text="{Binding modbusDevice.pDescription}" Grid.Row="11" Grid.Column="1" />
+
+            <Label Text="Login" Grid.Row="12" />
+            <Entry Text="{Binding modbusDevice.pLogin}" Grid.Row="12" Grid.Column="1" />
+
+            <Label Text="Passwort" Grid.Row="13" />
+            <Entry Text="{Binding modbusDevice.pPassword}" Grid.Row="13" Grid.Column="1" />
+
+            <Label Text="PLZ" Grid.Row="14" />
+            <Entry Text="{Binding modbusDevice.pPostalCode}" Grid.Row="14" Grid.Column="1" />
+
+            <Label Text="Ort" Grid.Row="15" />
+            <Entry Text="{Binding modbusDevice.pCity}" Grid.Row="15" Grid.Column="1" />
+
+            <Label Text="Straße" Grid.Row="16" />
+            <Entry Text="{Binding modbusDevice.pStreet}" Grid.Row="16" Grid.Column="1" />
+
+            <Label Text="TCP-Adresse" Grid.Row="17" />
+            <Entry Text="{Binding modbusDevice.pTCPAddress}" Grid.Row="17" Grid.Column="1" />
+
+            <Label Text="Typ" Grid.Row="18" />
+            <Entry Text="{Binding modbusDevice.pModbusType}" Grid.Row="18" Grid.Column="1" />
+
+            <Label Text="Geräteindex" Grid.Row="19" />
+            <Picker Title="{Binding modbusDevice.pPosition}" Grid.Row="19" Grid.Column="1" />
+
+            <Button Text="Speichern" Grid.Row="20" Grid.ColumnSpan="2" />
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>

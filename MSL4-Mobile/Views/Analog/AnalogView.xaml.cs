@@ -29,7 +29,11 @@ public partial class AnalogView : ContentPage
 		{
 			GetAnalogInputs();
 		});
-	}
+        MessagingCenter.Subscribe<Analog.AnalogOutDetailsView>(this, "updated", sender =>
+        {
+            GetAnalogOutputs();
+        });
+    }
 
 	private async void GetAnalogInputs()
 	{
@@ -69,7 +73,16 @@ public partial class AnalogView : ContentPage
 		await Navigation.PushAsync(new Analog.AnalogDetailsView(e.CurrentSelection.FirstOrDefault() as AnalogInput));
 		if(DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
 		{
-			(sender as ListView).SelectedItem = null;
+			(sender as CollectionView).SelectedItem = null;
 		}
+    }
+
+    async void OnSelectAnalogOutput(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
+    {
+		await Navigation.PushAsync(new Analog.AnalogOutDetailsView(e.CurrentSelection.FirstOrDefault() as AnalogOutput));
+        if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+        {
+            (sender as CollectionView).SelectedItem = null;
+        }
     }
 }

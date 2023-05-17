@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             x:Class="MSL4_Mobile.Views.Modbus.ModbusView"
+             x:Name="page"
+             Title="Modbus Geräte">
+        
+        <CollectionView Grid.Row="6" Grid.ColumnSpan="2" Margin="0,40"
+                        BindingContext="{x:Reference page}"
+                        ItemsSource="{Binding modbusDevices}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectModbusDevice">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.Header>
+                <Grid Padding="10">
+                    <Grid.RowSpacing>10</Grid.RowSpacing>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Row 1 -->
+                    <Label Text="Geräte Auswahl" Grid.ColumnSpan="2" FontSize="24" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+                    <!-- Row 2 -->
+                    <Label Text="Kennzeichnung" Grid.Row="1"/>
+                    <Entry Grid.Row="1" Grid.Column="1" />
+
+                    <!-- Row 3 -->
+                    <Label Text="Hersteller" Grid.Row="2" />
+                    <Entry Grid.Row="2" Grid.Column="1" />
+
+                    <!-- Row 4 -->
+                    <Label Text="Schnittstelle" Grid.Row="3" />
+                    <Entry Grid.Row="3" Grid.Column="1" />
+
+                    <!-- Row 5 -->
+                    <Label Text="PLZ" Grid.Row="4" />
+                    <Entry Grid.Row="4" Grid.Column="1" />
+
+                    <!-- Row 6 -->
+                    <Label Text="Ort" Grid.Row="5" />
+                    <Entry Grid.Row="5" Grid.Column="1" />
+
+                    <!-- Row 7 -->
+                    <Label Text="Modbus Geräte" Grid.ColumnSpan="2" Grid.Row="6" HorizontalOptions="Center" FontSize="24" Margin="0,10,0,0"/>
+                </Grid>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="services:ModbusDevice">
+                    <Grid Padding="10,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.RowSpacing>5</Grid.RowSpacing>
+
+                        <Label Text="Name" />
+                        <Label Text="{Binding pName}" FontSize="Header" Grid.Column="1"/>
+
+                        <Label Text="Hersteller" Grid.Row="1"/>
+                        <Label Text="{Binding pManufacturer}" Grid.Row="1" Grid.Column="1" />
+
+                        <Label Text="Port" Grid.Row="2"/>
+                        <Label Text="{Binding pPortName}" Grid.Row="2" Grid.Column="2" />
+
+                        <Label Text="Addresse" Grid.Row="3" />
+                        <Label Text="{Binding pDeviceAddress}" Grid.Row="3" Grid.Column="1" />
+
+                        <Label Text="Aktive Kanäle" Grid.Row="4"/>
+                        <Label Text="{Binding pLoggedChannelCount}" Grid.Row="4" Grid.Column="1" />
+
+                        <Label Text="Erstellt" Grid.Row="5" />
+                        <Label Text="{Binding pTimestamp}" Grid.Row="5" Grid.Column="1"/>
+
+                        <Label Text="Intervall" Grid.Row="6" />
+                        <Label Text="{Binding pPeriod}" Grid.Row="6" Grid.Column="1"/>
+
+                        <Label Text="Aktiv" Grid.Row="7"/>
+                        <CheckBox IsChecked="{Binding pActive}" Grid.Row="7" Grid.Column="1" HorizontalOptions="Start" HeightRequest="24" WidthRequest="24"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+</ContentPage>

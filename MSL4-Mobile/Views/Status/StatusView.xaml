@@ -16,13 +16,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,0">
+    <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,40">
         <Label Text="Allgemeine Einstellungen" HorizontalOptions="Center" FontSize="Header" Margin="0,4" />
         <Grid Style="{StaticResource GridStyle}">
             <Label Text="Türkontakt" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}" />
-                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" />
+                <Image Source="ballgreen.png" IsVisible="{Binding statusData.tuerkontakt}" HeightRequest="24"/>
+                <Image Source="ballred.png" IsVisible="{Binding statusData.tuerkontakt, Converter={services:InvertBool}}" HeightRequest="24"/>
                 <Label Text="{Binding statusData.tuerkontakt}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
         </Grid>

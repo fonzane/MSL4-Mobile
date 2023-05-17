@@ -9,25 +9,41 @@
 
     <TabBar>
 
-        <ShellContent
-            Title="MSL4"
-            ContentTemplate="{DataTemplate local:MainPage}"/>
+        <Tab Title="Info">
+            <ShellContent
+                Title="MSL4"
+                ContentTemplate="{DataTemplate local:MainPage}"/>
 
-        <ShellContent
-            Title="Status"
-            ContentTemplate="{DataTemplate views:Status.StatusView}" />
+            <ShellContent
+                Title="Status"
+                ContentTemplate="{DataTemplate views:Status.StatusView}" />
 
-        <ShellContent
-            Title="Digital"
-            ContentTemplate="{DataTemplate views:DigitalView}" />
+        </Tab>
 
-        <ShellContent
-            Title="Analog"
-            ContentTemplate="{DataTemplate views:AnalogView}" />
+        <Tab Title="Kanäle">
+            <ShellContent
+                Title="Digital"
+                ContentTemplate="{DataTemplate views:DigitalView}" />
 
-        <ShellContent
-            Title="MBus"
-            ContentTemplate="{DataTemplate views:MBus.MBusView}" />
+            <ShellContent
+                Title="Analog"
+                ContentTemplate="{DataTemplate views:AnalogView}" />
+
+        </Tab>
+
+        <Tab Title="Geräte">
+            <ShellContent
+                Title="MBus"
+                ContentTemplate="{DataTemplate views:MBus.MBusView}" />
+
+            <ShellContent
+                Title="Modbus"
+                ContentTemplate="{DataTemplate views:Modbus.ModbusView}" />
+
+        </Tab>
+
+
+
 
     </TabBar>
 

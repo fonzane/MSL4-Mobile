@@ -95,6 +95,35 @@ public class ChannelService
 		return digitalOutputChannelData;
 	}
 
+	public async Task<bool> SetDigitalOutput(string ip, string sessionid, DigitalOutput channel)
+	{
+        Uri uri = new Uri($"http://{ip}/RestDigitalOut/{sessionid}/{channel.id.ToString()}");
+
+        try
+        {
+            string json = JsonSerializer.Serialize<DigitalOutput>(channel, serializerOptions);
+            StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            Console.WriteLine("Setting DigitalOutput " + json.ToString());
+
+            HttpResponseMessage response = await client.PutAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+            return false;
+        }
+    }
+
     public async Task<List<AnalogInput>> GetAnalogInputs(string ip, string sessionid)
     {
         Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/");
@@ -172,6 +201,60 @@ public class ChannelService
         }
         return analogOutputs;
     }
+
+    public async Task<bool> SetAnalogOutput(string ip, string sessionid, AnalogOutput analogOutput)
+    {
+        Uri uri = new Uri($"http://{ip}/RestAnalogOut/{sessionid}/{analogOutput.id.ToString()}");
+
+        try
+        {
+            string json = JsonSerializer.Serialize<AnalogOutput>(analogOutput, serializerOptions);
+            StringContent content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(@"\tERROR {0}", ex.Message);
+            return false;
+        }
+
+    }
+
+    public async Task<List<string>> GetUnits(string ip, string sessionid)
+    {
+        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
+        UnitResponse units = null;
+
+        try
+        {
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string stringResponse = await response.Content.ReadAsStringAsync();
+                units = JsonSerializer.Deserialize<UnitResponse>(stringResponse);
+            }
+            else
+            {
+                Console.WriteLine("HTTP Request Failure: " + response.StatusCode);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"ERROR: {ex.Message}");
+        }
+        return units.values;
+    }
 }
 
 
@@ -203,6 +286,7 @@ public class DigitalOutput
 	public bool pValue { get; set; }
 	public int id { get; set; }
 	public string pDescription { get; set; }
+    public bool? modified { get; set; }
 }
 
 public class AnalogInput
@@ -248,6 +332,7 @@ public class AnalogOutput
     public string pFactor { get; set; }
     public string pValueAnalog { get; set; }
     public string pName { get; set; }
+    public string pUnit { get; set; }
     public int pAnalogType { get; set; }
     public bool pActive { get; set; }
     public int id { get; set; }
@@ -272,6 +357,11 @@ public enum DigitalType
 	TYPE_ERROR_MESSAGE = 102,
 	TYPE_TIME_COUNTER = 103,
 	TYPE_STATE = 104
+}
+
+public record UnitResponse
+{
+    public List<string> values { get; set; }
 }
 
 /*public class UnitList

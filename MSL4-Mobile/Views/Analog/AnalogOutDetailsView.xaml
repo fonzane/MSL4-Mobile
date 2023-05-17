@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MSL4_Mobile.Views.Analog.AnalogOutDetailsView"
+             Title="Analoger Ausgang Detailansicht"
+             x:Name="page">
+
+    <Grid RowSpacing="10" Margin="10" BindingContext="{x:Reference page}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Analoger Ausgang" FontSize="24"/>
+        <Entry Text="{Binding analogOutput.pName}" FontSize="24" Grid.Column="1" />
+
+        <Label Text="Analogwert" Grid.Row="1"/>
+        <Entry Text="{Binding analogOutput.pValueAnalog}" IsReadOnly="True" Grid.Row="1" Grid.Column="1"/>
+
+        <Label Text="Faktor" Grid.Row="2"/>
+        <Entry Text="{Binding analogOutput.pFactor}" Grid.Row="2" Grid.Column="1" />
+
+        <Label Text="Wert" Grid.Row="3" />
+        <Entry Text="{Binding analogOutput.pValuePower}" Grid.Row="3" Grid.Column="1" />
+
+        <Label Text="Untergrenze" Grid.Row="4" />
+        <Entry Text="{Binding analogOutput.pMinPower}" Grid.Row="4" Grid.Column="1" />
+
+        <Label Text="Untergrenze" Grid.Row="5" />
+        <Entry Text="{Binding analogOutput.pMaxPower}" Grid.Row="5" Grid.Column="1" />
+
+        <Label Text="Einheit" Grid.Row="6" />
+        <Picker
+            Grid.Row="6" Grid.Column="1"
+            ItemsSource="{Binding units}"
+            Title="{Binding analogOutput.pUnit}"
+            SelectedItem="{Binding analogOutput.pUnit}"/>
+
+        <Label Text="Typ" Grid.Row="7" />
+        <Picker
+            Grid.Row="7" Grid.Column="1"
+            ItemsSource="{Binding AnalogTypes}"
+            ItemDisplayBinding="{Binding Key}"
+            Title="{Binding channelType}"
+            SelectedItem="{Binding channelType}"
+            SelectedIndexChanged="OnChangeAnalogType"/>
+
+        <Label Text="Loggen" Grid.Row="8"/>
+        <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding analogOutput.pActive}" HorizontalOptions="Start"/>
+
+        <Button Clicked="OnSetChannelData" Text="Speichern" Grid.ColumnSpan="2" Grid.Row="9"/>
+
+    </Grid>
+
+</ContentPage>

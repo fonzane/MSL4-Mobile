@@ -19,19 +19,28 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
+    <ScrollView Margin="0,40">
 
         <VerticalStackLayout BindingContext="{x:Reference page}">
 
-            <CollectionView Margin="0,5"
+            <StackLayout Margin="{OnIdiom Phone='0,5,0,-25'}">
+                <Label Text="Eingänge" HorizontalOptions="Center" FontSize="Large"/>
+            </StackLayout>
+
+            <CollectionView
                 ItemsSource="{Binding digitalInputs}"
                 SelectionMode="Single"
                 SelectionChanged="OnSelectDigitalInput"
                 HeightRequest="{Binding digitalInputsHeight}">
 
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="*" HeightRequest="40">
-                        <Label Text="Eingänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Padding="10">
+
+                        <Label Text="Name" FontSize="Header" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Typ" FontSize="Header" Grid.Column="1" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Status" FontSize="Header" Grid.Column="2" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Logging" FontSize="Header" Grid.Column="3" IsVisible="{OnIdiom true, Phone=false}" />
+
                     </Grid>
                 </CollectionView.Header>
 
@@ -40,24 +49,24 @@
 
                         <Grid Style="{x:StaticResource CollectionGridStyle}">
                             <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Name: " />
+                                <Label Text="Name: " IsVisible="{OnIdiom false, Phone=true}"/>
                                 <Label Text="{Binding pName}"/>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Typ: " />
+                                <Label Text="Typ: " IsVisible="{OnIdiom false, Phone=true}"/>
                                 <Label Text="{Binding pDigitalType}" />
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Status: " />
-                                <Image Source="ballgreen" IsVisible="{Binding pValue}" HeightRequest="24"/>
-                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}" HeightRequest="24"/>
+                                <Label Text="Status: " IsVisible="{OnIdiom false, Phone=true}"/>
+                                <Image Source="ballgreen" IsVisible="{Binding pValue}" HeightRequest="24" Margin="0,-12,0,0"/>
+                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}" HeightRequest="24" Margin="0,-12,0,0"/>
                                 <Label Text="{Binding pValueText}" />
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Logging: "/>
+                                <Label Text="Logging: " IsVisible="{OnIdiom false, Phone=true}"/>
                                 <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
                             </HorizontalStackLayout>
                         </Grid>
@@ -66,14 +75,23 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <StackLayout Margin="{OnIdiom Phone='0,5,0,-25'}">
+                <Label Text="Ausgänge" HorizontalOptions="Center" FontSize="Large"/>
+            </StackLayout>
+
             <CollectionView
                 ItemsSource="{Binding digitalOutputs}"
-                SelectionMode="None"
-                HeightRequest="{Binding digitalOutputsHeight}">
+                SelectionMode="Single"
+                HeightRequest="{Binding digitalOutputsHeight}"
+                SelectionChanged="OnSelectDigitalOutput">
                 <CollectionView.Header>
 
-                    <Grid ColumnDefinitions="*" HeightRequest="40">
-                        <Label Text="Ausgänge" FontSize="24" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Grid.ColumnSpan="4" Padding="10">
+
+                        <Label Text="Name" FontSize="Header" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Beschreibung" FontSize="Header" Grid.Column="1" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Status" FontSize="Header" Grid.Column="2" IsVisible="{OnIdiom true, Phone=false}" />
+                        <Label Text="Logging" FontSize="Header" Grid.Column="3" IsVisible="{OnIdiom true, Phone=false}" />
                     </Grid>
 
                 </CollectionView.Header>
@@ -82,29 +100,33 @@
 
                         <Grid Style="{x:StaticResource CollectionGridStyle}">
                             <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Name: " />
+                                <Label Text="Name: " IsVisible="{OnIdiom false, Phone=true}" />
                                 <Label Text="{Binding pName}"/>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="1" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Beschreibung: " />
-                                <Label Text="{Binding pDescription}" />
+                                <Label Text="Beschreibung: " IsVisible="{OnIdiom false, Phone=true}" />
+                                <Entry Text="{Binding pDescription}" WidthRequest="150" Margin="0,-10,0,0"/>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="{OnIdiom 2, Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Status: " />
-                                <Image Source="ballgreen" IsVisible="{Binding pValue}"/>
-                                <Image Source="ballred" IsVisible="{Binding pValue, Converter={services:InvertBool}}"/>
+                                <Label Text="Status: " IsVisible="{OnIdiom false, Phone=true}" />
+                                <CheckBox IsChecked="{Binding pValue}" VerticalOptions="End" />
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
-                                <Label Text="Logging: "/>
-                                <CheckBox IsChecked="{Binding pActive}" IsEnabled="False" VerticalOptions="End"/>
+                                <Label Text="Logging: " IsVisible="{OnIdiom false, Phone=true}"/>
+                                <CheckBox IsChecked="{Binding pActive}" VerticalOptions="End" />
                             </HorizontalStackLayout>
                         </Grid>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <Button Text="Ausgänge sichern" Clicked="OnSaveDigitalOutputs" />
+                    </StackLayout>
+                </CollectionView.Footer>
             </CollectionView>
 
         </VerticalStackLayout>
