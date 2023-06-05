@@ -23,7 +23,7 @@
 
         <VerticalStackLayout BindingContext="{x:Reference page}">
 
-            <StackLayout Margin="{OnIdiom Phone='0,5,0,-25'}">
+            <StackLayout Margin="{OnIdiom '0,10',Phone='0,5,0,-25'}">
                 <Label Text="Eingänge" HorizontalOptions="Center" FontSize="Large"/>
             </StackLayout>
 
@@ -75,7 +75,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <StackLayout Margin="{OnIdiom Phone='0,5,0,-25'}">
+            <StackLayout Margin="{OnIdiom '0,5,0,15',Phone='0,5,0,-25'}">
                 <Label Text="Ausgänge" HorizontalOptions="Center" FontSize="Large"/>
             </StackLayout>
 
