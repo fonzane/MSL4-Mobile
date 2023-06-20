@@ -29,7 +29,7 @@
         <Grid Style="{StaticResource GridStyle}">
             <Label Text="Versorgung" VerticalOptions="Center"/>
             <HorizontalStackLayout Grid.Column="1" >
-                <Image Source="ballyellow.png" IsVisible="{Binding statusDatal}" HeightRequest="24"/>
+                <Image Source="ballyellow.png" IsVisible="{Binding statusData.stromausfall}" HeightRequest="24"/>
                 <Label Text="Akkubetrieb" IsVisible="{Binding statusData.stromausfall}" VerticalOptions="Center"/>
                 <Image Source="ballgreen.png" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}"  HeightRequest="24"/>
                 <Label Text="Netzbetrieb" IsVisible="{Binding statusData.stromausfall, Converter={services:InvertBool}}" VerticalOptions="Center"/>

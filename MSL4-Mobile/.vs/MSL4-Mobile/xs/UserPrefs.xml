@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{8A02DED4-84A7-4BF4-923B-9A13DA63F4BB}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile.csproj">
+    <Files>
+      <File FileName="MainPage.xaml.cs" Line="15" Column="1" />
+      <File FileName="Views/Status/StatusView.xaml.cs" Line="1" Column="24" />
+      <File FileName="Views/Digital/DigitalView.xaml.cs" Line="1" Column="1" />
+      <File FileName="Views/Digital/DigitalView.xaml" Line="1" Column="1" />
+      <File FileName="MSL4-Mobile.csproj" Line="63" Column="30" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MSL4-Mobile" expanded="True">
+            <Node name="MSL4-Mobile" expanded="True" selected="True">
+              <Node name="Views" expanded="True" />
+              <Node name="MainPage.xaml" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+</Properties>

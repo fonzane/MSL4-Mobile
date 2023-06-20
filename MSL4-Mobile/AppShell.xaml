@@ -29,6 +29,10 @@
                 Title="Analog"
                 ContentTemplate="{DataTemplate views:AnalogView}" />
 
+            <ShellContent
+                Title="GPIO"
+                ContentTemplate="{DataTemplate views:GPIO.GPIOView}" />
+
         </Tab>
 
         <Tab Title="Geräte">
