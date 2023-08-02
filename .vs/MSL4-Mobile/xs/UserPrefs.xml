@@ -1,48 +1,24 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.46" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/GPIO/GPIOView.xaml.cs">
-    <Files>
-      <File FileName="MSL4-Mobile/Views/GPIO/GPIOView.xaml.cs" Line="31" Column="39" />
-      <File FileName="MSL4-Mobile/Services/GPIOService.cs" Line="92" Column="25" />
-      <File FileName="MSL4-Mobile/Views/Modbus/ModbusView.xaml" Line="28" Column="47" NotebookId="1" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MSL4-Mobile" expanded="True">
-            <Node name="MSL4-Mobile" expanded="True">
-              <Node name="Platforms" expanded="True">
-                <Node name="Android" expanded="True" />
-              </Node>
-              <Node name="Services" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Digital" expanded="True">
-                  <Node name="DigitalDetailsView.xaml" expanded="True" />
-                  <Node name="DigitalView.xaml" expanded="True" />
-                </Node>
-                <Node name="GPIO" expanded="True">
-                  <Node name="GPIOView.xaml" expanded="True">
-                    <Node name="GPIOView.xaml.cs" selected="True" />
-                  </Node>
-                </Node>
-                <Node name="Modbus" expanded="True" />
-                <Node name="Status" expanded="True">
-                  <Node name="StatusView.xaml" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="MainPage.xaml" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.46" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Services/GPIOService.cs">
+    <Files>
+      <File FileName="MSL4-Mobile/Views/GPIO/GPIOView.xaml" />
+      <File FileName="MSL4-Mobile/Views/GPIO/GPIOView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Services/GPIOService.cs" Line="1" Column="1" />
+      <File FileName="MSL4-Mobile/Services/MBusService.cs" NotebookId="1" />
+      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml" NotebookId="1" />
+      <File FileName="MSL4-Mobile/Views/Modbus/ModbusDetailsView.xaml" NotebookId="1" />
+      <File FileName="MSL4-Mobile/Views/Modbus/ModbusDetailsView.xaml.cs" NotebookId="1" />
+      <File FileName="MSL4-Mobile/Views/Analog/AnalogDetailsView.xaml.cs" NotebookId="1" />
+      <File FileName="MSL4-Mobile/Views/Analog/AnalogDetailsView.xaml" Line="1" Column="1" NotebookId="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
 </Properties>

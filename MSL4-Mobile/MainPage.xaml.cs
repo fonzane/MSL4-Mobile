@@ -26,10 +26,10 @@ public partial class MainPage : ContentPage
 		//string ip = await DisplayPromptAsync("Verbindung herstellen", "Geben Sie die IP-Adresse des Gerätes an.");
 		//string ip = "msl4fw0189.fw-systeme.local";
 		//string ip = "localhost:3333/?maui=192.168.20.53";
-		string ip = "192.168.20.53";
+		string ip = "192.168.20.71";
+		//string ip = "msl4fw0361.fw-systeme.local";
 		string sessionid = await AuthService.GetSessionID(ip);
 		Console.WriteLine("MainPage sessionid: " + sessionid);
-		//GreetingText = "You are logged in.";
 		// ToDo: Do something if no sessionid.
 		GetDeviceData();
 		GetPeriodData();

@@ -25,6 +25,7 @@
 
             <StackLayout Margin="{OnIdiom '0,10',Phone='0,5,0,-25'}">
                 <Label Text="Eingänge" HorizontalOptions="Center" FontSize="Large"/>
+                <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnReadDigitalInputs" />
             </StackLayout>
 
             <CollectionView
@@ -77,6 +78,7 @@
 
             <StackLayout Margin="{OnIdiom '0,5,0,15',Phone='0,5,0,-25'}">
                 <Label Text="Ausgänge" HorizontalOptions="Center" FontSize="Large"/>
+                <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnReadDigitalOutputs" />
             </StackLayout>
 
             <CollectionView

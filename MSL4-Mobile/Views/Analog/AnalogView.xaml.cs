@@ -85,4 +85,14 @@ public partial class AnalogView : ContentPage
             (sender as CollectionView).SelectedItem = null;
         }
     }
+
+    void OnGetAnalogInputs(System.Object sender, System.EventArgs e)
+    {
+		GetAnalogInputs();
+    }
+
+    void OnGetAnalogOutputs(System.Object sender, System.EventArgs e)
+    {
+		GetAnalogOutputs();
+    }
 }

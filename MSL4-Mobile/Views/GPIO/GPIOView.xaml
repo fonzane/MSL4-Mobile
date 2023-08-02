@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             xmlns:local="clr-namespace:MSL4_Mobile.Views.GPIO"
              x:Class="MSL4_Mobile.Views.GPIO.GPIOView"
              x:Name="page"
              Title="GPIOView">
 
-    <CollectionView
+    <ContentPage.Resources>
+        <x:Int32 x:Key="Serial">1</x:Int32>
+        <x:Int32 x:Key="TCP">3</x:Int32>
+    </ContentPage.Resources>
+
+    <CollectionView Margin="10, 40"
         BindingContext="{x:Reference page}"
         ItemsSource="{Binding gPIOData}">
 
@@ -27,11 +33,64 @@
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Grid.RowSpacing>5</Grid.RowSpacing>
 
                     <Label Text="Name" />
-                    <Label Text="{Binding pName}" FontSize="Header" Grid.Column="1" />
+                    <Entry Text="{Binding pName}" FontSize="Header" Grid.Column="1" />
+
+                    <Label Text="Zustand" Grid.Row="1" />
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1">
+                        <Image Source="ballgreen.png" IsVisible="{Binding pValue}" HeightRequest="24" />
+                        <Image Source="ballred.png" IsVisible="{Binding pValue, Converter={services:InvertBool}}" HeightRequest="24" />
+                        <Label Text="On" IsVisible="{Binding pActive}" VerticalOptions="Center"/>
+                        <Label Text="Off" IsVisible="{Binding pActive, Converter={services:InvertBool}}"  VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Aktiv" Grid.Row="2" />
+                    <CheckBox HorizontalOptions="Start" Grid.Row="2" Grid.Column="1" IsChecked="{Binding pActive}" HeightRequest="24"/>
+
+                    <Label Text="Verzögerung IN" Grid.Row="3" />
+                    <Entry Text="{Binding pLimesMin}" Grid.Row="3" Grid.Column="1" />
+
+                    <Label Text="Verzögerung OUT" Grid.Row="4" />
+                    <Entry Text="{Binding pLimesMax}" Grid.Row="4" Grid.Column="1" />
+
+                    <Label Text="Alarmtext" Grid.Row="5" />
+                    <Entry Text="{Binding pAlertMessage}" Grid.Row="5" Grid.Column="1" />
+
+                    <Label Text="Modus" Grid.Row="6" />
+                    <Picker Grid.Row="6" Grid.Column="1"
+                            Title="{Binding pDigitalModus}"
+                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=digitalModes}"
+                            SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=selectedDigitalMode}"/>
+
+                    <Label Text="Typ" Grid.Row="7" x:DataType="x:String" />
+                    <Picker  Grid.Row="7" Grid.Column="1"
+                             Title="{Binding pGPIOType}"
+                             ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=gpioTypes}"
+                             SelectedItem="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=selectedgpioType}"/>
+
+                    <Label Text="Starttyp" Grid.Row="8" x:DataType="x:String" />
+                    <Picker Grid.Row="8" Grid.Column="1"
+                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=startTypes}"
+                        ItemDisplayBinding="{Binding Value}"
+                        Title="{Binding initialStartType.Value}"
+                        SelectedItem="{Binding initialStartType}"/>
+
+                    <Label Text="Anzeigetyp" Grid.Row="9" />
+                    <Picker Grid.Row="9" Grid.Column="1"
+                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type local:GPIOView}}, Path=dbVisualTypeOptions}"
+                            Title="{Binding initialVisualType}"
+                            SelectedItem="{Binding initialVisualType}"/>
+
+                    <Label Text="Loggen" Grid.Row="10" />
+                    <CheckBox IsChecked="{Binding pActive}" HorizontalOptions="Start" Grid.Row="10" Grid.Column="1" HeightRequest="24" />
+
+                    <Button Text="Speichern" Grid.Row="11" Grid.ColumnSpan="2" Clicked="OnSetGPIOData" HorizontalOptions="Center" CommandParameter="{Binding .}"/>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>

@@ -24,6 +24,7 @@
 
             <StackLayout Margin="{OnIdiom '0,0,0,10',Phone='0,0,0,-5'}">
                 <Label Text="Analoge Eingänge" HorizontalOptions="Center" FontSize="Large"/>
+                <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnGetAnalogInputs" />
             </StackLayout>
 
             <CollectionView
@@ -70,6 +71,7 @@
 
             <StackLayout Margin="{OnIdiom '0,-20,0,10', Phone='0,-35,0,-5'}">
                 <Label Text="Analoge Ausgänge" HorizontalOptions="Center" FontSize="Large"/>
+                <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnGetAnalogOutputs" />
             </StackLayout>
 
             <CollectionView

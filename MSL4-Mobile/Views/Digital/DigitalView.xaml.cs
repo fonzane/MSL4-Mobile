@@ -32,7 +32,7 @@ public partial class DigitalView : ContentPage
         });
     }
 
-	private async void GetDigitalInputs()
+	public async void GetDigitalInputs()
 	{
 		Console.WriteLine("Getting Digital Inputs.");
 		List<DigitalInput> digitalInputs = await channelService.GetDigitalInputs(AuthService.ipaddress, AuthService.sessionid);
@@ -48,7 +48,7 @@ public partial class DigitalView : ContentPage
         return;
 	}
 
-	private async void GetDigitalOutputs()
+	public async void GetDigitalOutputs()
 	{
 		Console.WriteLine("Getting Digital Outputs.");
 		List<DigitalOutput> digitalOutputs = await channelService.GetDigitalOutputs(AuthService.ipaddress, AuthService.sessionid);
@@ -96,5 +96,15 @@ public partial class DigitalView : ContentPage
 				await DisplayAlert("Error", "Couldn't set data for digital output " + channel.pName, "OK");
 			}
         }
+    }
+
+    void OnReadDigitalInputs(System.Object sender, System.EventArgs e)
+    {
+		GetDigitalInputs();
+    }
+
+    void OnReadDigitalOutputs(System.Object sender, System.EventArgs e)
+    {
+		GetDigitalOutputs();
     }
 }

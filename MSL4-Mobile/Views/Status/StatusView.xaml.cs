@@ -26,5 +26,6 @@ public partial class StatusView : ContentPage
 		statusData = await statusService.GetMSL4Status(AuthService.ipaddress, AuthService.sessionid);
 		OnPropertyChanged(nameof(statusData));
 		Console.WriteLine("Status Data fetched for " + statusData.name);
+		MessagingCenter.Unsubscribe<MainPage>(this, "msl-connection-initialized");
 	}
 }

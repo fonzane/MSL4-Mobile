@@ -37,14 +37,14 @@ public partial class AnalogDetailsView : ContentPage
 		InitializeComponent();
     }
 
-    async void OnSetChannelData(System.Object sender, System.EventArgs e)
+    async void OnSetChannelData(object sender, EventArgs e)
     {
         bool response = await channelService.SetAnalogInput(AuthService.ipaddress, AuthService.sessionid, analogInput);
         if (response)
         {
             // ToDo: Need to find a way to refresh AnalogView after setting channel data
             await Navigation.PopToRootAsync();
-            MessagingCenter.Send<AnalogDetailsView>(this, "updated");
+            MessagingCenter.Send(this, "updated");
         }
         else
         {
@@ -52,7 +52,7 @@ public partial class AnalogDetailsView : ContentPage
         }
     }
 
-    void OnChangeAnalogType(System.Object sender, System.EventArgs e)
+    void OnChangeAnalogType(object sender, EventArgs e)
     {
         analogInput.pAnalogType = (int)channelType.Value;
     }
