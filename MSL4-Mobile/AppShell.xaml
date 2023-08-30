@@ -33,6 +33,10 @@
                 Title="GPIO"
                 ContentTemplate="{DataTemplate views:GPIO.GPIOView}" />
 
+            <ShellContent
+                Title="Zähler"
+                ContentTemplate="{DataTemplate views:Meter.MeterView}" />
+
         </Tab>
 
         <Tab Title="Geräte">

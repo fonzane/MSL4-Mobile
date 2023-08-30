@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:MSL4_Mobile.Services"
              x:Class="MSL4_Mobile.Views.AnalogView"
-             x:Name="page">
+             x:Name="page"
+             Title="Analoge Kanäle">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="CollectionGridStyle" TargetType="Grid">
-                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='2*,*'}" />
+                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='*,*'}" />
                 <Setter Property="RowDefinitions" Value="{OnIdiom auto, Phone='auto,auto'}" />
                 <Setter Property="Padding" Value="10,0" />
             </Style>
@@ -34,7 +35,6 @@
                 HeightRequest="{Binding analogInputsHeight}">
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Padding="10,0">
-
                         <Label Text="Name" FontSize="Header" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Typ" FontSize="Header" Grid.Column="1" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Wert" FontSize="Header" Grid.Column="2" IsVisible="{OnIdiom true, Phone=false}" />

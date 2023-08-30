@@ -60,4 +60,9 @@ public partial class GPIOView : ContentPage
 		if (selectedGPIO.initialVisualType != null) selectedGPIO.pDBVisualTypeID = dbVisualTypeIDs[dbVisualTypeOptions.FindIndex(vo => vo == selectedGPIO.initialVisualType)];
 		gPIOService.SetGPIOData(AuthService.ipaddress, AuthService.sessionid, selectedGPIO.id.ToString(), selectedGPIO);
 	}
+
+    void OnReadGPIOData(System.Object sender, System.EventArgs e)
+    {
+		GetGPIOData();
+    }
 }

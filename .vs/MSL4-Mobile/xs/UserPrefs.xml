@@ -1,24 +1,16 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.46" />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.pixel_5_-_api_33" />
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="Android.pixel_5_-_api_33" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml.cs">
+    <Files>
+      <File FileName="MSL4-Mobile/MainPage.xaml.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.68" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Services/GPIOService.cs">
-    <Files>
-      <File FileName="MSL4-Mobile/Views/GPIO/GPIOView.xaml" />
-      <File FileName="MSL4-Mobile/Views/GPIO/GPIOView.xaml.cs" />
-      <File FileName="MSL4-Mobile/Services/GPIOService.cs" Line="1" Column="1" />
-      <File FileName="MSL4-Mobile/Services/MBusService.cs" NotebookId="1" />
-      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml" NotebookId="1" />
-      <File FileName="MSL4-Mobile/Views/Modbus/ModbusDetailsView.xaml" NotebookId="1" />
-      <File FileName="MSL4-Mobile/Views/Modbus/ModbusDetailsView.xaml.cs" NotebookId="1" />
-      <File FileName="MSL4-Mobile/Views/Analog/AnalogDetailsView.xaml.cs" NotebookId="1" />
-      <File FileName="MSL4-Mobile/Views/Analog/AnalogDetailsView.xaml" Line="1" Column="1" NotebookId="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
 </Properties>

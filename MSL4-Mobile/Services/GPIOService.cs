@@ -76,7 +76,7 @@ public class GPIOService
 
     public async void SetGPIOData(string ip, string sessionid, string id, GPIO gpioData)
     {
-        Uri uri = new Uri($"http://{ip}/RestMSL4GPIOTableData/{sessionid}/id");
+        Uri uri = new Uri($"http://{ip}/RestMSL4GPIOTableData/{sessionid}/{id}");
 
         try
         {

@@ -94,5 +94,6 @@ public partial class AnalogView : ContentPage
     void OnGetAnalogOutputs(System.Object sender, System.EventArgs e)
     {
 		GetAnalogOutputs();
+		Console.WriteLine("HELLO");
     }
 }

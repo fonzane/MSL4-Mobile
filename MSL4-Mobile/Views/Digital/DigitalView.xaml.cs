@@ -57,9 +57,9 @@ public partial class DigitalView : ContentPage
 		OnPropertyChanged(nameof(digitalOutputs));
 
         if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
-            digitalOutputsHeight = digitalOutputs.Count * 60 + 40;
+            digitalOutputsHeight = digitalOutputs.Count * 60;
         else
-            digitalOutputsHeight = digitalOutputs.Count * 90 + 40;
+            digitalOutputsHeight = digitalOutputs.Count * 90;
         OnPropertyChanged(nameof(digitalOutputsHeight));
         return;
 	}
@@ -105,6 +105,7 @@ public partial class DigitalView : ContentPage
 
     void OnReadDigitalOutputs(System.Object sender, System.EventArgs e)
     {
+		Console.WriteLine("HELLO");
 		GetDigitalOutputs();
     }
 }

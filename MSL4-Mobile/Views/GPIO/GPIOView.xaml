@@ -16,6 +16,13 @@
         BindingContext="{x:Reference page}"
         ItemsSource="{Binding gPIOData}">
 
+        <CollectionView.Header>
+            <StackLayout>
+                <Label HorizontalOptions="Center" Text="GPIO Werte" FontSize="Large" />
+                <Button Text="Lesen" HorizontalOptions="Start" Clicked="OnReadGPIOData" />
+            </StackLayout>
+        </CollectionView.Header>
+
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="services:GPIO">
                 <Grid Padding="10,20">

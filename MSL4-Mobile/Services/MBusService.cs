@@ -311,7 +311,6 @@ public class MBusService
             Console.WriteLine(@"\tERROR {0}", ex.Message);
         }
         return unitResponse;
-
     }
 }
 

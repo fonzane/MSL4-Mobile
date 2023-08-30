@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
+             x:Class="MSL4_Mobile.Views.Meter.MeterView"
+             x:Name="page"
+             Title="MeterView">
+
+    <CollectionView Margin="10, 40"
+                    BindingContext="{x:Reference page}"
+                    ItemsSource="{Binding meters}">
+
+        <CollectionView.Header>
+            <StackLayout>
+                <Label HorizontalOptions="Center" Text="Zählerwerte" FontSize="Large" />
+                <Button Text="Lesen" Clicked="OnReadMeterData" HorizontalOptions="Start"/>
+            </StackLayout>
+        </CollectionView.Header>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="services:Meter">
+                <Grid Padding="10,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.RowSpacing>5</Grid.RowSpacing>
+
+                    <Label Text="Name" />
+                    <Entry Text="{Binding pName}" FontSize="Header" Grid.Column="1" />
+
+                    <Label Text="Zählerstand" Grid.Row="1"/>
+                    <Entry Text="{Binding pValue}" Grid.Row="1" Grid.Column="1" />
+
+                    <Label Text="Faktor" Grid.Row="2" />
+                    <Entry Text="{Binding pFactor}" Grid.Row="2" Grid.Column="1" />
+
+                    <Label Text="Berechnet" Grid.Row="3" />
+                    <Entry Text="{Binding pValueCalc}" Grid.Row="3" Grid.Column="1" IsReadOnly="True"/>
+
+                    <Label Text="Einheit" Grid.Row="4" />
+                    <Picker Grid.Row="4" Grid.Column="1"
+                            Title="{Binding pUnit}"
+                            ItemsSource="{Binding unitData.options}" />
+
+                    <Label Text="Anzeigetyp" Grid.Row="5" />
+                    <Picker Title="Auswahl" Grid.Row="5" Grid.Column="1" IsEnabled="False" />
+
+                    <Button Text="Speichern" Grid.Row="6" Grid.ColumnSpan="2" Clicked="OnSetMeterData" CommandParameter="{Binding id}"/>
+                </Grid>
+
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentPage>

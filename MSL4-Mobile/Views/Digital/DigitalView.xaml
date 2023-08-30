@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:MSL4_Mobile.Services"
              x:Class="MSL4_Mobile.Views.DigitalView"
              x:Name="page"
-             xmlns:services="clr-namespace:MSL4_Mobile.Services"
              Title="Digitale Kanäle">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="CollectionGridStyle" TargetType="Grid">
-                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='2*,*'}" />
+                <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='*,*'}" />
                 <Setter Property="RowDefinitions" Value="{OnIdiom auto, Phone='auto,auto'}" />
-                <Setter Property="Padding" Value="10" />
+                <Setter Property="Padding" Value="10,0" />
             </Style>
             <Style x:Key="HorizontalStackStyle" TargetType="HorizontalStackLayout">
                 <Setter Property="HeightRequest" Value="30"/>
@@ -19,12 +19,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView Margin="0,40">
+    <ScrollView Margin="0,50">
 
-        <VerticalStackLayout BindingContext="{x:Reference page}">
+        <FlexLayout Direction="Column" BindingContext="{x:Reference page}">
 
-            <StackLayout Margin="{OnIdiom '0,10',Phone='0,5,0,-25'}">
-                <Label Text="Eingänge" HorizontalOptions="Center" FontSize="Large"/>
+            <StackLayout Margin="{OnIdiom '0,0,0,10',Phone='0,0,0,-5'}">
+                <Label Text="Digitale Eingänge" HorizontalOptions="Center" FontSize="Large"/>
                 <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnReadDigitalInputs" />
             </StackLayout>
 
@@ -33,21 +33,16 @@
                 SelectionMode="Single"
                 SelectionChanged="OnSelectDigitalInput"
                 HeightRequest="{Binding digitalInputsHeight}">
-
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Padding="10">
-
+                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Padding="10,0">
                         <Label Text="Name" FontSize="Header" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Typ" FontSize="Header" Grid.Column="1" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Status" FontSize="Header" Grid.Column="2" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Logging" FontSize="Header" Grid.Column="3" IsVisible="{OnIdiom true, Phone=false}" />
-
                     </Grid>
                 </CollectionView.Header>
-
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="services:DigitalInput">
-
                         <Grid Style="{x:StaticResource CollectionGridStyle}">
                             <HorizontalStackLayout Style="{x:StaticResource HorizontalStackStyle}">
                                 <Label Text="Name: " IsVisible="{OnIdiom false, Phone=true}"/>
@@ -76,7 +71,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <StackLayout Margin="{OnIdiom '0,5,0,15',Phone='0,5,0,-25'}">
+            <StackLayout Margin="{OnIdiom '0,-20,0,10',Phone='0,-35,0,-5'}">
                 <Label Text="Ausgänge" HorizontalOptions="Center" FontSize="Large"/>
                 <Button Text="Lesen" HorizontalOptions="Start" FontSize="Small" Clicked="OnReadDigitalOutputs" />
             </StackLayout>
@@ -88,7 +83,7 @@
                 SelectionChanged="OnSelectDigitalOutput">
                 <CollectionView.Header>
 
-                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Grid.ColumnSpan="4" Padding="10">
+                    <Grid ColumnDefinitions="*,*,*,*" HeightRequest="40" Grid.ColumnSpan="4" Padding="10,0">
 
                         <Label Text="Name" FontSize="Header" IsVisible="{OnIdiom true, Phone=false}" />
                         <Label Text="Beschreibung" FontSize="Header" Grid.Column="1" IsVisible="{OnIdiom true, Phone=false}" />
@@ -131,7 +126,7 @@
                 </CollectionView.Footer>
             </CollectionView>
 
-        </VerticalStackLayout>
+        </FlexLayout>
 
 
     </ScrollView>
