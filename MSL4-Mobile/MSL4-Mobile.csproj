@@ -64,6 +64,7 @@
 	  <None Remove="Converters\" />
 	  <None Remove="Views\Modbus\" />
 	  <None Remove="Views\Meter\" />
+	  <None Remove="Views\Home\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -77,6 +78,7 @@
 	  <Folder Include="Converters\" />
 	  <Folder Include="Views\Modbus\" />
 	  <Folder Include="Views\Meter\" />
+	  <Folder Include="Views\Home\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />
