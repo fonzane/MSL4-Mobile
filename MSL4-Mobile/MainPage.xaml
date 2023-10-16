@@ -25,19 +25,42 @@
         <Label
             Text="Stellen Sie eine Verbindung zum MSL4 her."
             SemanticProperties.HeadingLevel="Level2"
-            SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+            SemanticProperties.Description="Welcome to dot net Multi platform App UI"
             FontSize="18"
             HorizontalOptions="Center" />
 
-        <Entry
+        <!--<Entry
             Placeholder="IP-Adresse"
             Text="{Binding ip}"
             FontSize="20"
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HorizontalTextAlignment="Center"/>-->
+
+        <Entry
+            Placeholder="Email-Adresse"
+            Text="{Binding email}"
+            FontSize="20"
+            HorizontalOptions="Center"
+            WidthRequest="300"
+            HorizontalTextAlignment="Center"/>
+
+        <Entry
+            IsPassword="True"
+            Placeholder="Passwort"
+            Text="{Binding password}"
+            FontSize="20"
+            HorizontalOptions="Center"
+            WidthRequest="300"
+            HorizontalTextAlignment="Center"/>
 
         <Button
+            Text="Login"
+            Clicked="OnWebmonitorLogin"/>
+
+        <!--<Button
             Text="Verbindung herstellen"
-            Clicked="OnConnectToMSL"/>
+            Clicked="OnConnectToMSL"/>-->
 
     </VerticalStackLayout>
 </ContentPage>
