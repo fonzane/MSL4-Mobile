@@ -1,25 +1,22 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.30CFE831-E3FE-4C21-B346-A686DD23FE7B" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml.cs">
+    <Files>
+      <File FileName="MSL4-Mobile/MainPage.xaml" Line="1" Column="1" />
+      <File FileName="MSL4-Mobile/MainPage.xaml.cs" Line="37" Column="75" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="MSL4-Mobile">
-            <Node name="MSL4-Mobile">
-              <Node name="AppShell.xaml" selected="True" />
-              <Node name="MainPage.xaml" expanded="True" />
-            </Node>
-          </Node>
-        </State>
+        <State name="__root__" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.30CFE831-E3FE-4C21-B346-A686DD23FE7B" />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.95" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.68" />
 </Properties>

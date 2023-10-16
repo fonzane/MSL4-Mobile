@@ -10,12 +10,12 @@
 
     <TabBar BindingContext="{x:Reference shell}">
 
-        <Tab Title="Verbindung">
+        <Tab Title="Verbindung" IsVisible="{Binding showConnectionTab}">
             <ShellContent
                 Title="Verbindung"
                 ContentTemplate="{DataTemplate local:MainPage}"
+                Route="mainView"
                 />
-
         </Tab>
 
 

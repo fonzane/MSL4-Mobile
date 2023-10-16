@@ -12,22 +12,24 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		Shell.SetTabBarIsVisible(Application.Current.MainPage, false);
 	}
 
-    async void OnConnectToMSL(System.Object sender, System.EventArgs e)
+    async Task<bool> OnConnectToMSL(System.Object sender, System.EventArgs e)
     {
-		Console.WriteLine(ip);
-		string resp = await AuthService.GetSessionID(ip);
+        string ip = await DisplayPromptAsync("Login Erfolgreich", "MSL4 IP-Adresse eingeben", "OK");
+        this.ip = ip;
+        string resp = await AuthService.GetSessionID(ip);
 		Console.WriteLine(resp);
 		if (resp == "false")
 		{
 			await DisplayAlert("Verbindungsfehler", "Verbindung konnte nicht hergestellt werden.", "OK");
+			return false;
 		} else
 		{
 			Console.WriteLine("Verbindungsherstellung erfolgreich");
 			await Shell.Current.GoToAsync("//infoView");
-			//await Navigation.PushAsync(new Views.Home.HomeView());
+			MessagingCenter.Send<MainPage>(this, "isConnected");
+			return true;
 		}
 	}
 
@@ -36,20 +38,11 @@ public partial class MainPage : ContentPage
 		bool loginResponse = await AuthService.LoginWebmonitor(email, password);
 		if (loginResponse)
 		{
-			string ip = await DisplayPromptAsync("Login Erfolgreich", "MSL4 IP-Adresse eingeben", "OK");
-			this.ip = ip;
-			OnConnectToMSL(null, null);
-    //        string resp = await AuthService.GetSessionID(ip);
-    //        if (resp == "false")
-    //        {
-    //            await DisplayAlert("Verbindungsfehler", "Verbindung konnte nicht hergestellt werden.", "OK");
-    //            return;
-    //        }
-    //        else
-    //        {
-				//Console.WriteLine("Connection successful" + resp);
-    //            await Shell.Current.GoToAsync("//infoView");
-    //        }
+			bool success = await OnConnectToMSL(null, null);
+			while (!success)
+			{
+				success = await OnConnectToMSL(null, null);
+			}
         }
 	}
 
