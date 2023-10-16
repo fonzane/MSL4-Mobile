@@ -8,7 +8,7 @@
     Shell.FlyoutBehavior="Disabled"
     x:Name="shell">
 
-    <TabBar BindingContext="{x:Reference shell}" IsVisible="{Binding isConnected}">
+    <TabBar BindingContext="{x:Reference shell}">
 
         <Tab Title="Verbindung">
             <ShellContent

@@ -8,10 +8,8 @@ public partial class AppShell : Shell
 
 	public AppShell()
 	{
-		Console.WriteLine(AuthService.isConnected.ToString());
 		InitializeComponent();
-		isConnected = true;
-		OnPropertyChanged(nameof(isConnected));
 	}
+
 }
 
