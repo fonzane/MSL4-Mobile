@@ -8,11 +8,11 @@
     Shell.FlyoutBehavior="Disabled"
     x:Name="shell">
 
-    <TabBar>
+    <TabBar BindingContext="{x:Reference shell}" IsVisible="{Binding isConnected}">
 
-        <Tab Title="Main">
+        <Tab Title="Verbindung">
             <ShellContent
-                Title="Main"
+                Title="Verbindung"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 />
 

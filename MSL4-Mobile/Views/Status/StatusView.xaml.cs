@@ -11,12 +11,13 @@ public partial class StatusView : ContentPage
 	public StatusView()
 	{
 		statusService = new StatusService();
-		InitializeComponent();
 
-		MessagingCenter.Subscribe<MainPage>(this, "msl-connection-initialized", sender =>
-		{
-			GetMSL4Status();
-		});
+		//MessagingCenter.Subscribe<Views.Home.HomeView>(this, "msl-connection-initialized", sender =>
+		//{
+		//	GetMSL4Status();
+		//});
+		GetMSL4Status();
+		InitializeComponent();
 	}
 
 	// ToDo: Modem Statistiken müssen noch in die View implementiert werden.

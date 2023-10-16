@@ -1,16 +1,33 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <MultiItemStartupConfigurations />
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.68" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/MainPage.xaml.cs">
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.68" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/AppShell.xaml">
     <Files>
-      <File FileName="MSL4-Mobile/MainPage.xaml.cs" Line="26" Column="8" />
+      <File FileName="MSL4-Mobile/MainPage.xaml" />
+      <File FileName="MSL4-Mobile/MainPage.xaml.cs" />
+      <File FileName="MSL4-Mobile/Views/Home/HomeView.xaml.cs" />
+      <File FileName="MSL4-Mobile/Services/AuthService.cs" />
+      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml" />
+      <File FileName="MSL4-Mobile/Views/Status/StatusView.xaml.cs" />
+      <File FileName="MSL4-Mobile/AppShell.xaml" Line="13" Column="14" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MSL4-Mobile">
+            <Node name="MSL4-Mobile" expanded="True">
+              <Node name="AppShell.xaml" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
 </Properties>

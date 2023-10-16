@@ -23,11 +23,11 @@ public class AuthService
 			HttpResponseMessage response = await client.GetAsync(uri);
 			if (response.IsSuccessStatusCode)
 			{
+				isConnected = true;
 				string stringResponse = await response.Content.ReadAsStringAsync();
 				authResponse = JsonSerializer.Deserialize<AuthResponse>(stringResponse);
 				sessionid = authResponse.sessionid.ToString();
 				Console.WriteLine("SessionID: " + sessionid);
-				isConnected = true;
 			}
 		} catch (Exception ex)
 		{
