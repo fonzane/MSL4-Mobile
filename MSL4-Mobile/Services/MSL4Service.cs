@@ -30,7 +30,7 @@ public class MSL4Service
 
     public async Task<MSL4Data> SetMSL4Data(string ip, MSL4Data mSL4Data)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/MSL4DeviceData");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/MSL4DeviceData");
         MSL4Data mSL4DataResponse = null;
         try
         {
@@ -59,7 +59,7 @@ public class MSL4Service
 
     public async Task<MSL4Data> GetMSL4Data(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/MSL4DeviceData?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/MSL4DeviceData?pSessionID={sessionid}");
         MSL4Data mSL4Data = null;
 
         try
@@ -84,7 +84,7 @@ public class MSL4Service
 
     public async Task<PeriodDataResponse> GetMSL4PeriodData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectPeriodData?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectPeriodData?pSessionID={sessionid}");
         PeriodDataResponse periodDataResponse = null;
 
         try

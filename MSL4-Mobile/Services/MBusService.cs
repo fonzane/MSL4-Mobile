@@ -29,7 +29,7 @@ public class MBusService
 
     public async Task<MBusDeviceDetails> GetMBusDeviceDetails(string ip, string sessionid, int deviceID)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData?pSessionID={sessionid}&pDBAction=TYPE_READ&pDeviceType=1&pDBDeviceID={deviceID}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/DBDeviceData?pSessionID={sessionid}&pDBAction=TYPE_READ&pDeviceType=1&pDBDeviceID={deviceID}");
         MBusDeviceDetails mBusDeviceDetails = null;
 
         try
@@ -54,7 +54,7 @@ public class MBusService
 
     public async Task<List<MBusChannelData>> GetMBusChannelData(string ip, string sessionid, int pDBDeviceID)
     {
-        Uri uri = new Uri($"http://{ip}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}");
         List<MBusChannelData> mBusChannelData = null;
 
         try
@@ -79,7 +79,7 @@ public class MBusService
 
     public async void SetMBusChannelData(string ip, string sessionid, int pDBDeviceID, MBusChannelData channelData)
     {
-        Uri uri = new Uri($"http://{ip}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}/{channelData.id}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMBus/{sessionid}/?pDBDeviceID={pDBDeviceID}/{channelData.id}");
 
         try
         {
@@ -107,7 +107,7 @@ public class MBusService
 
     public async Task<MBusDeviceDetails> SetMBusDeviceDetails(string ip, string sessionid, MBusDeviceDetails deviceDetails)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/DBDeviceData");
         MBusDeviceDetails deviceDetailsResponse = null;
         try
         {
@@ -136,7 +136,7 @@ public class MBusService
 
     public async Task<MBusDevicesResponse> GetMBusDevices(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=1");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=1");
         MBusDevicesResponse getMBusDevicesResponse = null;
 
         try
@@ -160,7 +160,7 @@ public class MBusService
 
     public async Task<ComDataResponse> GetComData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectComData?pSessionID={sessionid}&pType=1");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectComData?pSessionID={sessionid}&pType=1");
         ComDataResponse comData = null;
         try
         {
@@ -184,7 +184,7 @@ public class MBusService
 
     public async Task<BaudDataResponse> GetBaudData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectBaudData?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectBaudData?pSessionID={sessionid}");
         BaudDataResponse baudData = null;
         try
         {
@@ -208,7 +208,7 @@ public class MBusService
 
     public async Task<MBusIndexDataResponse> GetMBusIndexData(string ip, string sessionid, int deviceID)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectMBusIndex?pSessionID={sessionid}&pDBDeviceID={deviceID}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectMBusIndex?pSessionID={sessionid}&pDBDeviceID={deviceID}");
         MBusIndexDataResponse indexData = null;
         try
         {
@@ -239,7 +239,7 @@ public class MBusService
 		string baudRate,
 		string initialTimeStamp)
 	{
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/CallServer?pSessionID={sessionid}&pMethod=SearchMBus" +
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/CallServer?pSessionID={sessionid}&pMethod=SearchMBus" +
 			$"&pDBDeviceID=0&pDeviceType=1&pPortName={interfaceName}&pBaud={baudRate}&pParity=2&pDataBits=8&pStopBits=1" +
 			$"&pTCPADDress=&pPortType=1&pMyLogID={initialTimeStamp}&pDate={initialTimeStamp}");
 
@@ -267,7 +267,7 @@ public class MBusService
     public async Task<MBusSearchResponse> CheckMBusSearchStatus(string ip, string sessionid, string initialTimeStamp)
     {
         string timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/CallServer?pSessionID={sessionid}&pMethod=ReadLog&pMyLogID={initialTimeStamp}&pDate={timestamp}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/CallServer?pSessionID={sessionid}&pMethod=ReadLog&pMyLogID={initialTimeStamp}&pDate={timestamp}");
         MBusSearchResponse searchResponse = null;
         try
         {
@@ -291,7 +291,7 @@ public class MBusService
 
     public async Task<UnitData> GetUnitData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
         UnitData unitResponse = null;
         try
         {

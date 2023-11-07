@@ -23,7 +23,7 @@ public class GPIOService
 
     public async Task<DBDataType> GetVisualTypes(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectDBVisualType?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectDBVisualType?pSessionID={sessionid}");
         DBDataType visualTypes = null;
 
         try
@@ -48,7 +48,7 @@ public class GPIOService
 
     public async Task<List<GPIO>> GetGPIOData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/RestMSL4GPIOTableData/{sessionid}/");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMSL4GPIOTableData/{sessionid}/");
         List<GPIO> gPIOData = null;
 
         try
@@ -76,7 +76,7 @@ public class GPIOService
 
     public async void SetGPIOData(string ip, string sessionid, string id, GPIO gpioData)
     {
-        Uri uri = new Uri($"http://{ip}/RestMSL4GPIOTableData/{sessionid}/{id}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMSL4GPIOTableData/{sessionid}/{id}");
 
         try
         {

@@ -19,7 +19,7 @@ public class StatusService
 
     public async Task<MSL4StatusData> GetMSL4Status(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/MSL4StatusData?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/MSL4StatusData?pSessionID={sessionid}");
         MSL4StatusData statusData = null;
 
         try

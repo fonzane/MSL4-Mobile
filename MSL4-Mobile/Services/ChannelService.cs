@@ -19,7 +19,7 @@ public class ChannelService
 
 	public async Task<List<DigitalInput>> GetDigitalInputs(string ip, string sessionid)
 	{
-		Uri uri = new Uri($"http://{ip}/RestDigitalIn/{sessionid}/");
+		Uri uri = new Uri($"{AuthService.mslAddress}/RestDigitalIn/{sessionid}/");
 		List<DigitalInput> digitalInputChannelData = new List<DigitalInput>();
 
 		try
@@ -43,7 +43,7 @@ public class ChannelService
 
     public async Task<bool> SetDigitalInput(string ip, string sessionid, DigitalInput channel)
     {
-        Uri uri = new Uri($"http://{ip}/RestDigitalIn/{sessionid}/{channel.id.ToString()}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestDigitalIn/{sessionid}/{channel.id.ToString()}");
 
         try
         {
@@ -72,7 +72,7 @@ public class ChannelService
 
     public async Task<List<DigitalOutput>> GetDigitalOutputs(string ip, string sessionid)
 	{
-		Uri uri = new Uri($"http://{ip}/RestDigitalOut/{sessionid}/");
+		Uri uri = new Uri($"{AuthService.mslAddress}/RestDigitalOut/{sessionid}/");
 		List<DigitalOutput> digitalOutputChannelData = new List<DigitalOutput>();
 
 		try
@@ -97,7 +97,7 @@ public class ChannelService
 
 	public async Task<bool> SetDigitalOutput(string ip, string sessionid, DigitalOutput channel)
 	{
-        Uri uri = new Uri($"http://{ip}/RestDigitalOut/{sessionid}/{channel.id.ToString()}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestDigitalOut/{sessionid}/{channel.id.ToString()}");
 
         try
         {
@@ -126,7 +126,7 @@ public class ChannelService
 
     public async Task<List<AnalogInput>> GetAnalogInputs(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestAnalog/{sessionid}/");
         List<AnalogInput> analogInputs = new List<AnalogInput>();
 
         try
@@ -151,7 +151,7 @@ public class ChannelService
 
 	public async Task<bool> SetAnalogInput(string ip, string sessionid, AnalogInput channel)
 	{
-		Uri uri = new Uri($"http://{ip}/RestAnalog/{sessionid}/{channel.id.ToString()}");
+		Uri uri = new Uri($"{AuthService.mslAddress}/RestAnalog/{sessionid}/{channel.id.ToString()}");
 
 		try
 		{

@@ -23,9 +23,9 @@
             HorizontalOptions="Center" />
 
         <Label
-            Text="Stellen Sie eine Verbindung zum MSL4 her."
+            Text="Webmonitor Login"
             SemanticProperties.HeadingLevel="Level2"
-            SemanticProperties.Description="Welcome to dot net Multi platform App UI"
+            SemanticProperties.Description="Loggen Sie sich beim Webmonitor ein."
             FontSize="18"
             HorizontalOptions="Center" />
 

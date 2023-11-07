@@ -15,7 +15,7 @@
 		<ApplicationTitle>MSL4-Mobile</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.msl4_mobile</ApplicationId>
+		<ApplicationId>de.fwsysteme.msl4mobile</ApplicationId>
 		<ApplicationIdGuid>f4ec12f0-bc88-40c3-ab5e-e07a901f0025</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -32,6 +32,15 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
+	  <CodesignKey>iPhone Developer</CodesignKey>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	  <CodesignKey>iPhone Distribution</CodesignKey>
+	  <CodesignProvision>Automatic:AppStore</CodesignProvision>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->

@@ -21,7 +21,7 @@ public class MeterService
 
     public async Task<List<Meter>> GetMeterData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/RestMeter/{sessionid}/");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMeter/{sessionid}/");
         List<Meter> meterData = null;
 
         try
@@ -48,7 +48,7 @@ public class MeterService
 
     public async void SetMeterData(string ip, string sessionid, string id, Meter meterData)
     {
-        Uri uri = new Uri($"http://{ip}/RestMeter/{sessionid}/{id}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestMeter/{sessionid}/{id}");
 
         try
         {
@@ -74,7 +74,7 @@ public class MeterService
 
     public async Task<UnitData> GetUnitData(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
         UnitData unitResponse = null;
         try
         {

@@ -14,13 +14,24 @@ public class AuthService
 	public static string ipaddress { get; set; } = "";
 	public static string auth_token { get; set; }
 	public static bool isConnected = false;
+	public static string baseURL = "https://proxy.webmonitor.fw-systeme.de/?target=";
+	public static string mslAddress;
 
 	public static async Task<string> GetSessionID(string ip)
 	{
-		client.DefaultRequestHeaders.Add("Cookie", "authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRzY2hhZmZlcnRAZnctc3lzdGVtZS5kZSIsIm5hbWUiOiJUaW0gU2NoYWZmZXJ0Iiwicm9sZXMiOlsic3VwZXJ1c2VyIl0sImRpdmlzaW9uIjoiVXNlciIsIl9pZCI6IjYxYjIwYTQ4ZWViZWY4YmEzYzkwMzE2OSIsImFkbWluaXN0cmF0b3MiOlsiNjFiMjBhNDhlZWJlZjhiYTNjOTAzMTY5Il0sImlhdCI6MTY3ODg4NzI1NiwiZXhwIjoxNjc5MjMyODU2fQ.qE7FwU7Vu34ZHJzCeYUBXCZiYEdslvhUca0LSSUxHCA");
+		//client.DefaultRequestHeaders.Add("Cookie", "authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRzY2hhZmZlcnRAZnctc3lzdGVtZS5kZSIsIm5hbWUiOiJUaW0gU2NoYWZmZXJ0Iiwicm9sZXMiOlsic3VwZXJ1c2VyIl0sImRpdmlzaW9uIjoiVXNlciIsIl9pZCI6IjYxYjIwYTQ4ZWViZWY4YmEzYzkwMzE2OSIsImFkbWluaXN0cmF0b3MiOlsiNjFiMjBhNDhlZWJlZjhiYTNjOTAzMTY5Il0sImlhdCI6MTY3ODg4NzI1NiwiZXhwIjoxNjc5MjMyODU2fQ.qE7FwU7Vu34ZHJzCeYUBXCZiYEdslvhUca0LSSUxHCA");
         ipaddress = ip;
-		Uri uri = new Uri($"http://{ip}/LogWeb/servlet/FOLogin?pUser=administrator&pPassword=admin");
-		AuthResponse authResponse = new AuthResponse();
+
+		if (ip.Contains("192") || ip.Contains("10."))
+		{
+			mslAddress = $"http://{ip}";
+		} else
+		{
+			mslAddress = $"http://{ip}";
+		}
+
+		Uri uri = new Uri($"{mslAddress}/LogWeb/servlet/FOLogin?pUser=administrator&pPassword=admin");
+        AuthResponse authResponse = new AuthResponse();
 
 		try
 		{
@@ -44,7 +55,7 @@ public class AuthService
 	public static async Task<bool> LoginWebmonitor(string email, string password)
 	{
 		client.Timeout = TimeSpan.FromSeconds(5);
-		Uri uri = new Uri("http://localhost:3000/auth/login");
+		Uri uri = new Uri("https://api.webmonitor.fw-systeme.de/auth/login");
 		LoginData loginData = new LoginData
 		{
 			email = email,

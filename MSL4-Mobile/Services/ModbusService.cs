@@ -20,7 +20,7 @@ public class ModbusService
     public async Task<ModbusResponse> GetModbusDevices(string ip, string sessionid)
     {
 
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=2");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/DBDeviceTableData?pSessionID={sessionid}&pDeviceType=2");
         ModbusResponse modbusResponse = null;
 
         try
@@ -45,7 +45,7 @@ public class ModbusService
 
     public async Task<ModbusDeviceDetails> GetModbusDeviceDetails(string ip, string sessionid, int deviceID)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/DBDeviceData?pSessionID={sessionid}&pDeviceType=2&pDBAction=TYPE_READ&pDBDeviceID={deviceID}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/DBDeviceData?pSessionID={sessionid}&pDeviceType=2&pDBAction=TYPE_READ&pDBDeviceID={deviceID}");
         ModbusDeviceDetails deviceDetails = null;
 
         try
