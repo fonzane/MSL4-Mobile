@@ -10,7 +10,7 @@ public class ModbusService
 
 	public ModbusService()
 	{
-		client = new HttpClient();
+		client = AuthService.client;
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping

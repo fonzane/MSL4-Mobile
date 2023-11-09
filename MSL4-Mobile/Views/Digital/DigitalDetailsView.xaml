@@ -4,7 +4,7 @@
              xmlns:services="clr-namespace:MSL4_Mobile.Services"
              x:Class="MSL4_Mobile.Views.Digital.DigitalDetailsView"
              x:Name="page"
-             Title="DigitalDetailsView">
+             Title="Digitaler Kanal">
 
     <Grid RowSpacing="10" Margin="10" BindingContext="{x:Reference page}">
         <Grid.RowDefinitions>

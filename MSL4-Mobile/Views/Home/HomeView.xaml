@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MSL4_Mobile.Views.Home.HomeView"
-             Title="HomeView"
+             Title="MSL4"
              x:Name="page">
     <FlexLayout Direction="Column" BindingContext="{x:Reference page}" Margin="10,40">
         <Grid ColumnDefinitions="*,*" Margin="0,2">

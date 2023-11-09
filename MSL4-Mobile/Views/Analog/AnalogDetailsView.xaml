@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MSL4_Mobile.Views.Analog.AnalogDetailsView"
              x:Name="page"
-             Title="AnalogDetailsView">
+             Title="Analoger Kanal">
 
     <Grid RowSpacing="10" Margin="10" BindingContext="{x:Reference page}">
         <Grid.RowDefinitions>

@@ -10,12 +10,6 @@
         VerticalOptions="Center"
         BindingContext="{x:Reference page}">
 
-        <Image
-            Source="dotnet_bot.png"
-            SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="200"
-            HorizontalOptions="Center" />
-
         <Label
             Text="MSL4-Mobile"
             SemanticProperties.HeadingLevel="Level1"
@@ -28,14 +22,6 @@
             SemanticProperties.Description="Loggen Sie sich beim Webmonitor ein."
             FontSize="18"
             HorizontalOptions="Center" />
-
-        <!--<Entry
-            Placeholder="IP-Adresse"
-            Text="{Binding ip}"
-            FontSize="20"
-            HorizontalOptions="Center"
-            WidthRequest="200"
-            HorizontalTextAlignment="Center"/>-->
 
         <Entry
             Placeholder="Email-Adresse"
@@ -54,9 +40,24 @@
             WidthRequest="300"
             HorizontalTextAlignment="Center"/>
 
+
+        <!--<Image
+            Source="dotnet_bot.png"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="200"
+            HorizontalOptions="Center" />-->
+
         <Button
             Text="Login"
             Clicked="OnWebmonitorLogin"/>
+
+        <!--<Entry
+            Placeholder="IP-Adresse"
+            Text="{Binding ip}"
+            FontSize="20"
+            HorizontalOptions="Center"
+            WidthRequest="200"
+            HorizontalTextAlignment="Center"/>-->
 
         <!--<Button
             Text="Verbindung herstellen"

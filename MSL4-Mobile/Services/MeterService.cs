@@ -12,7 +12,7 @@ public class MeterService
 
 	public MeterService()
 	{
-		client = new HttpClient();
+		client = AuthService.client;
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
@@ -103,7 +103,7 @@ public class Meter
     public string pUnit { get; set; }
     public float pValue { get; set; }
     public string pLimesMax { get; set; }
-    public int pFactor { get; set; }
+    public float pFactor { get; set; }
     public float pLimesDelayIn { get; set; }
     public string pValueCalc { get; set; }
     public string pAlertMessage { get; set; }

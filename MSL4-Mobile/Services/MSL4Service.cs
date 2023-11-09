@@ -21,7 +21,8 @@ public class MSL4Service
 
     public MSL4Service()
 	{
-        client = new HttpClient();
+        //client = new HttpClient();
+        client = AuthService.client;
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping

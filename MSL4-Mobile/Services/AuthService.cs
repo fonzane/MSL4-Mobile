@@ -1,11 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Text.Json;
 
 namespace MSL4_Mobile.Services;
 
 public class AuthService
 {
-	private static HttpClient client = new HttpClient();
+	public static HttpClient client = new HttpClient();
     private static JsonSerializerOptions serializerOptions = new JsonSerializerOptions
     {
         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
@@ -14,20 +15,25 @@ public class AuthService
 	public static string ipaddress { get; set; } = "";
 	public static string auth_token { get; set; }
 	public static bool isConnected = false;
-	public static string baseURL = "https://proxy.webmonitor.fw-systeme.de/?target=";
+	public static string proxyURL = "https://proxy.webmonitor.fw-systeme.de/?maui=";
+	public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
 	public static string mslAddress;
 
-	public static async Task<string> GetSessionID(string ip)
+	static AuthService()
 	{
-		//client.DefaultRequestHeaders.Add("Cookie", "authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRzY2hhZmZlcnRAZnctc3lzdGVtZS5kZSIsIm5hbWUiOiJUaW0gU2NoYWZmZXJ0Iiwicm9sZXMiOlsic3VwZXJ1c2VyIl0sImRpdmlzaW9uIjoiVXNlciIsIl9pZCI6IjYxYjIwYTQ4ZWViZWY4YmEzYzkwMzE2OSIsImFkbWluaXN0cmF0b3MiOlsiNjFiMjBhNDhlZWJlZjhiYTNjOTAzMTY5Il0sImlhdCI6MTY3ODg4NzI1NiwiZXhwIjoxNjc5MjMyODU2fQ.qE7FwU7Vu34ZHJzCeYUBXCZiYEdslvhUca0LSSUxHCA");
+        client.Timeout = TimeSpan.FromSeconds(5);
+    }
+
+    public static async Task<string> GetSessionID(string ip)
+	{
         ipaddress = ip;
 
 		if (ip.Contains("192") || ip.Contains("10."))
 		{
-			mslAddress = $"http://{ip}";
+			mslAddress = $"{proxyURL}{ip}";
 		} else
 		{
-			mslAddress = $"http://{ip}";
+			mslAddress = $"{proxyURL}{ip}";
 		}
 
 		Uri uri = new Uri($"{mslAddress}/LogWeb/servlet/FOLogin?pUser=administrator&pPassword=admin");
@@ -54,8 +60,7 @@ public class AuthService
 
 	public static async Task<bool> LoginWebmonitor(string email, string password)
 	{
-		client.Timeout = TimeSpan.FromSeconds(5);
-		Uri uri = new Uri("https://api.webmonitor.fw-systeme.de/auth/login");
+		Uri uri = new Uri($"{webmonitorURL}/auth/login");
 		LoginData loginData = new LoginData
 		{
 			email = email,
@@ -73,6 +78,8 @@ public class AuthService
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 LoginResponse loginResponse = JsonSerializer.Deserialize<LoginResponse>(stringResponse);
 				auth_token = loginResponse.access_token;
+                SecureStorage.Default.SetAsync("saved_token", auth_token);
+
                 Console.WriteLine("Login successfull");
 				Console.WriteLine(auth_token);
                 return true;
@@ -89,6 +96,41 @@ public class AuthService
             return false;
         }
     }
+
+	private static void DecodeJWTAndPrint(string jwt)
+	{
+
+        jwt = jwt.Replace('_', '/').Replace('-', '+');
+        string payload = jwt.Split(".")[1];
+
+        switch (payload.Length % 4)
+        {
+            case 2: payload += "=="; break;
+            case 3: payload += "="; break;
+        }
+        byte[] decoded = Convert.FromBase64String(payload);
+        string decodedToken = System.Text.Encoding.Default.GetString(decoded);
+        Console.WriteLine(decodedToken);
+
+        JWTPayload jWTPayload = JsonSerializer.Deserialize<JWTPayload>(decodedToken);
+        Console.WriteLine("Expiration: " + jWTPayload.exp);
+        Console.WriteLine("Timestamp" + DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+    }
+
+    public async static Task<bool> CheckLoggedIn()
+    {
+        string saved_token = await SecureStorage.Default.GetAsync("saved_token");
+        if (saved_token != null)
+        {
+            auth_token = saved_token;
+            client.DefaultRequestHeaders.Add("Cookie", $"authorization={auth_token}");
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
 }
 
 public class AuthResponse
@@ -109,3 +151,16 @@ public class LoginData
 	public string password { get; set; }
 }
 
+public class JWTPayload
+{
+    public string email { get; set; }
+    public string name { get; set; }
+    public List<string> roles { get; set; }
+    public string division { get; set; }
+    public string _id { get; set; }
+    public List<string> administratos { get; set; }
+    public List<string> mapModes { get; set; }
+    public List<string> allowedIPs { get; set; }
+    public double iat { get; set; }
+    public double exp { get; set; }
+}

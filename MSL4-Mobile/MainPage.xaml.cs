@@ -12,6 +12,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
+		CheckLoggedIn();
 	}
 
     async Task<bool> OnConnectToMSL(System.Object sender, System.EventArgs e)
@@ -33,8 +34,9 @@ public partial class MainPage : ContentPage
 		}
 	}
 
-	async void OnWebmonitorLogin(System.Object sender, System.EventArgs e)
+	private async void OnWebmonitorLogin(object sender, EventArgs args)
 	{
+		Console.WriteLine("TEst");
 		bool loginResponse = await AuthService.LoginWebmonitor(email, password);
 		if (loginResponse)
 		{
@@ -43,7 +45,19 @@ public partial class MainPage : ContentPage
 			{
 				success = await OnConnectToMSL(null, null);
 			}
-        }
+        } else
+		{
+			return;
+		}
+	}
+
+	private async void CheckLoggedIn()
+	{
+		bool isLoggedIn = await AuthService.CheckLoggedIn();
+		if (isLoggedIn)
+		{
+			OnConnectToMSL(null, null);
+		}
 	}
 
 }

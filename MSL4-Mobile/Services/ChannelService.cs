@@ -10,7 +10,7 @@ public class ChannelService
 
 	public ChannelService()
 	{
-		client = new HttpClient();
+		client = AuthService.client;
 		serializerOptions = new JsonSerializerOptions
 		{
 			Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
@@ -179,7 +179,7 @@ public class ChannelService
 
 	public async Task<List<AnalogOutput>> GetAnalogOutputs(string ip, string sessionid)
 	{
-        Uri uri = new Uri($"http://{ip}/RestAnalogOut/{sessionid}/");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestAnalogOut/{sessionid}/");
         List<AnalogOutput> analogOutputs = new List<AnalogOutput>();
 
         try
@@ -204,7 +204,7 @@ public class ChannelService
 
     public async Task<bool> SetAnalogOutput(string ip, string sessionid, AnalogOutput analogOutput)
     {
-        Uri uri = new Uri($"http://{ip}/RestAnalogOut/{sessionid}/{analogOutput.id.ToString()}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/RestAnalogOut/{sessionid}/{analogOutput.id.ToString()}");
 
         try
         {
@@ -233,7 +233,7 @@ public class ChannelService
 
     public async Task<List<string>> GetUnits(string ip, string sessionid)
     {
-        Uri uri = new Uri($"http://{ip}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
+        Uri uri = new Uri($"{AuthService.mslAddress}/LogWeb/servlet/SelectUnit?pSessionID={sessionid}");
         UnitResponse units = null;
 
         try

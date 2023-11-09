@@ -14,7 +14,7 @@ public class GPIOService
     public GPIOService()
     {
         gpioTypes = new List<string> { "Input", "Output" };
-        client = new HttpClient();
+        client = AuthService.client;
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping

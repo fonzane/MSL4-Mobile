@@ -10,7 +10,8 @@ public class StatusService
 
 	public StatusService()
 	{
-        client = new HttpClient();
+        //client = new HttpClient();
+        client = AuthService.client;
         serializerOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
