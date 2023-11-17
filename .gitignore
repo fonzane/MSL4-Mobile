@@ -1,5 +1,5 @@
 /MSL4-Mobile/obj
 /MSL4-Mobile/bin
 /MSL4Mobile.mobileprovision
-distribution.cer
-mac_installer.cer
+/distribution.cer
+/mac_installer.cer
