@@ -5,6 +5,7 @@
              x:Name="page"
              Shell.TabBarIsVisible="False">
     <VerticalStackLayout
+        Margin="0, -100"
         Spacing="25"
         Padding="30,0"
         VerticalOptions="Center"
@@ -40,13 +41,6 @@
             WidthRequest="300"
             HorizontalTextAlignment="Center"/>
 
-
-        <!--<Image
-            Source="dotnet_bot.png"
-            SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="200"
-            HorizontalOptions="Center" />-->
-
         <Button
             Text="Login"
             Clicked="OnWebmonitorLogin"/>
@@ -58,10 +52,6 @@
             HorizontalOptions="Center"
             WidthRequest="200"
             HorizontalTextAlignment="Center"/>-->
-
-        <!--<Button
-            Text="Verbindung herstellen"
-            Clicked="OnConnectToMSL"/>-->
 
     </VerticalStackLayout>
 </ContentPage>

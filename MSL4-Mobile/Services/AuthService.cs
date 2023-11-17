@@ -15,13 +15,15 @@ public class AuthService
 	public static string ipaddress { get; set; } = "";
 	public static string auth_token { get; set; }
 	public static bool isConnected = false;
-	public static string proxyURL = "https://proxy.webmonitor.fw-systeme.de/?maui=";
-	public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
-	public static string mslAddress;
+	//public static string proxyURL = "http://localhost:3333/?maui=";
+    public static string proxyURL = "https://proxy.webmonitor.fw-systeme.de/?maui=";
+    //public static string webmonitorURL = "http://localhost:3000";
+    public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
+    public static string mslAddress;
 
 	static AuthService()
 	{
-        client.Timeout = TimeSpan.FromSeconds(5);
+        client.Timeout = TimeSpan.FromSeconds(10);
     }
 
     public static async Task<string> GetSessionID(string ip)
@@ -78,7 +80,15 @@ public class AuthService
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 LoginResponse loginResponse = JsonSerializer.Deserialize<LoginResponse>(stringResponse);
 				auth_token = loginResponse.access_token;
-                SecureStorage.Default.SetAsync("saved_token", auth_token);
+                client.DefaultRequestHeaders.Add("Cookie", $"authorization={auth_token}");
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {auth_token}");
+                try
+                {
+                    SecureStorage.Default.SetAsync("saved_token", auth_token);
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
 
                 Console.WriteLine("Login successfull");
 				Console.WriteLine(auth_token);
@@ -97,12 +107,54 @@ public class AuthService
         }
     }
 
-	private static void DecodeJWTAndPrint(string jwt)
-	{
+	//private static void DecodeJWTAndPrint(string jwt)
+	//{
 
+ //       jwt = jwt.Replace('_', '/').Replace('-', '+');
+ //       string payload = jwt.Split(".")[1];
+
+ //       switch (payload.Length % 4)
+ //       {
+ //           case 2: payload += "=="; break;
+ //           case 3: payload += "="; break;
+ //       }
+ //       byte[] decoded = Convert.FromBase64String(payload);
+ //       string decodedToken = System.Text.Encoding.Default.GetString(decoded);
+ //       Console.WriteLine(decodedToken);
+
+ //       JWTPayload jWTPayload = JsonSerializer.Deserialize<JWTPayload>(decodedToken);
+ //       Console.WriteLine("Expiration: " + jWTPayload.exp);
+ //       Console.WriteLine("Timestamp" + DateTimeOffset.UtcNow.ToUnixTimeSeconds());
+ //   }
+
+    public async static Task<bool> CheckLoggedIn()
+    {
+        string saved_token = await SecureStorage.Default.GetAsync("saved_token");
+        if (saved_token != null)
+        {
+            Console.WriteLine("Token: " + saved_token);
+            if (CheckJWTValidity(saved_token))
+            {
+                auth_token = saved_token;
+                client.DefaultRequestHeaders.Add("Cookie", $"authorization={auth_token}");
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {auth_token}");
+                return true;
+            } else
+            {
+                Console.WriteLine("JWT Validity check failed");
+                return false;
+            }
+        } else
+        {
+            Console.WriteLine("Check Login: no token found.");
+            return false;
+        }
+    }
+
+    private static bool CheckJWTValidity(string jwt)
+    {
         jwt = jwt.Replace('_', '/').Replace('-', '+');
         string payload = jwt.Split(".")[1];
-
         switch (payload.Length % 4)
         {
             case 2: payload += "=="; break;
@@ -114,20 +166,15 @@ public class AuthService
 
         JWTPayload jWTPayload = JsonSerializer.Deserialize<JWTPayload>(decodedToken);
         Console.WriteLine("Expiration: " + jWTPayload.exp);
-        Console.WriteLine("Timestamp" + DateTimeOffset.UtcNow.ToUnixTimeSeconds());
-    }
+        Console.WriteLine("Timestamp: " + DateTimeOffset.UtcNow.ToUnixTimeSeconds());
 
-    public async static Task<bool> CheckLoggedIn()
-    {
-        string saved_token = await SecureStorage.Default.GetAsync("saved_token");
-        if (saved_token != null)
-        {
-            auth_token = saved_token;
-            client.DefaultRequestHeaders.Add("Cookie", $"authorization={auth_token}");
-            return true;
-        } else
+        if (DateTimeOffset.UtcNow.ToUnixTimeSeconds() > jWTPayload.exp)
         {
             return false;
+        }
+        else
+        {
+            return true;
         }
     }
 

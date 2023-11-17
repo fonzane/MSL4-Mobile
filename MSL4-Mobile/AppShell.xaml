@@ -10,16 +10,24 @@
 
     <TabBar BindingContext="{x:Reference shell}">
 
-        <Tab Title="Verbindung" IsVisible="{Binding showConnectionTab}">
+        <Tab Title="Login" IsVisible="{Binding showLoginTab}">
             <ShellContent
-                Title="Verbindung"
+                Title="Webmonitor Login"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="mainView"
                 />
         </Tab>
 
+        <Tab Title="Verbindung" >
 
-        <Tab Title="Info">
+            <ShellContent
+                Title="Verbindung"
+                ContentTemplate="{DataTemplate views:Connection.ConnectionView}" Route="connection" />
+
+        </Tab>
+
+        <Tab Title="Info" IsVisible="{Binding showNav}">
+
 
             <ShellContent
                 Title="MSL4"
@@ -29,9 +37,13 @@
                 Title="Status"
                 ContentTemplate="{DataTemplate views:Status.StatusView}" />
 
+            <ShellContent
+                Title="Visual"
+                ContentTemplate="{DataTemplate views:Visual.VisualView}" />
+
         </Tab>
 
-        <Tab Title="Kanäle">
+        <Tab Title="Kanäle" IsVisible="{Binding showNav}">
             <ShellContent
                 Title="Digital"
                 ContentTemplate="{DataTemplate views:DigitalView}" />
@@ -50,7 +62,7 @@
 
         </Tab>
 
-        <Tab Title="Geräte">
+        <Tab Title="Geräte" IsVisible="{Binding showNav}">
             <ShellContent
                 Title="MBus"
                 ContentTemplate="{DataTemplate views:MBus.MBusView}" />

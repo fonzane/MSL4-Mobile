@@ -19,7 +19,7 @@
 		<ApplicationIdGuid>f4ec12f0-bc88-40c3-ab5e-e07a901f0025</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>0.2.1</ApplicationDisplayVersion>
+		<ApplicationDisplayVersion>0.3.1</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -28,14 +28,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<ReleaseVersion>0.2.1</ReleaseVersion>
-		<Description>Diese Version sollte es ermöglichen auf alle Geräte zugreifen zu können, die vom Webmonitor aus erreichbar sind.</Description>
+		<ReleaseVersion>0.3.1</ReleaseVersion>
+		<Description>Smartphone-App um auf MSL4-Geräte zuzugreifen.</Description>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>iPhone Developer</CodesignKey>
 	  <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
+	  <CodesignProvision></CodesignProvision>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	  <WarningLevel>4</WarningLevel>
@@ -44,18 +45,21 @@
 	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>iPhone Distribution</CodesignKey>
 	  <CodesignProvision>Automatic:AppStore</CodesignProvision>
+	  <CodesignEntitlements>Platforms\iOS\Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
+	  <CodesignKey>Developer ID Application</CodesignKey>
+	  <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+	  <CodesignEntitlements></CodesignEntitlements>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
 	  <CodesignKey>Mac Developer</CodesignKey>
 	  <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
-	  <CodesignEntitlements>Platforms\MacCatalyst\Entitlements.plist</CodesignEntitlements>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
-		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
@@ -83,6 +87,15 @@
 	  <None Remove="Views\Modbus\" />
 	  <None Remove="Views\Meter\" />
 	  <None Remove="Views\Home\" />
+	  <None Remove="Views\Connection\" />
+	  <None Remove="Views\Visual\" />
+	  <None Remove="Resources\.DS_Store" />
+	  <None Remove="Resources\AppIcon\fw-icon.svg" />
+	  <None Remove="Resources\AppIcon\FW-App-Icon_152px.jpg" />
+	  <None Remove="Resources\AppIcon\appicon.jpg" />
+	  <None Remove="Resources\AppIcon\FW-App-Icon_152px.svg" />
+	  <None Remove="Resources\AppIcon\appiconfg.svg" />
+	  <None Remove="Resources\AppIcon\appicon.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -97,6 +110,8 @@
 	  <Folder Include="Views\Modbus\" />
 	  <Folder Include="Views\Meter\" />
 	  <Folder Include="Views\Home\" />
+	  <Folder Include="Views\Connection\" />
+	  <Folder Include="Views\Visual\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />
@@ -120,5 +135,10 @@
 	  <BundleResource Include="Resources\Styles\Colors.xaml" Condition=" '$(EnableDefaultXamlItems)' == 'true' ">
 	    <SubType>Designer</SubType>
 	  </BundleResource>
+	  <BundleResource Include="Resources\.DS_Store" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\appiconfg.svg" BaseSize="152,152" />
+	  <MauiIcon Include="Resources\AppIcon\appicon.svg" />
 	</ItemGroup>
 </Project>
