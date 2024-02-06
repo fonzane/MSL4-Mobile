@@ -74,57 +74,60 @@
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="services:MBusDeviceData">
-                        <Grid Padding="10,20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <Grid.RowSpacing>5</Grid.RowSpacing>
+                        <Border Stroke="#000000"
+                                StrokeThickness="2">
+                            <Grid Padding="10,20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.RowSpacing>5</Grid.RowSpacing>
 
-                            <Label Text="Name" />
-                            <Label Text="{Binding pName}" Grid.Column="1"/>
+                                <Label Text="Name" />
+                                <Label Text="{Binding pName}" Grid.Column="1"/>
 
-                            <Label Text="Hersteller" Grid.Row="1"/>
-                            <Label Text="{Binding pManufacturer}" Grid.Row="1" Grid.Column="1" />
+                                <Label Text="Hersteller" Grid.Row="1"/>
+                                <Label Text="{Binding pManufacturer}" Grid.Row="1" Grid.Column="1" />
 
-                            <Label Text="Medium" Grid.Row="2"/>
-                            <Label Text="{Binding pMBusMedium}" Grid.Row="2" Grid.Column="2" />
+                                <Label Text="Medium" Grid.Row="2"/>
+                                <Label Text="{Binding pMBusMedium}" Grid.Row="2" Grid.Column="2" />
 
-                            <Label Text="Port" Grid.Row="3" />
-                            <Label Text="{Binding pPortName}" Grid.Row="3" Grid.Column="1" />
+                                <Label Text="Port" Grid.Row="3" />
+                                <Label Text="{Binding pPortName}" Grid.Row="3" Grid.Column="1" />
 
-                            <Label Text="Primär" Grid.Row="4"/>
-                            <Label Text="{Binding pDeviceAddress}" Grid.Row="4" Grid.Column="1" />
+                                <Label Text="Primär" Grid.Row="4"/>
+                                <Label Text="{Binding pDeviceAddress}" Grid.Row="4" Grid.Column="1" />
 
-                            <Label Text="Sekundär" Grid.Row="5" />
-                            <Label Text="{Binding pDeviceSecAddress}" Grid.Row="5" Grid.Column="1"/>
+                                <Label Text="Sekundär" Grid.Row="5" />
+                                <Label Text="{Binding pDeviceSecAddress}" Grid.Row="5" Grid.Column="1"/>
 
-                            <Label Text="Aktive Kanäle" Grid.Row="6" />
-                            <Label Text="{Binding pLoggedChannelCount}" Grid.Row="6" Grid.Column="1"/>
+                                <Label Text="Aktive Kanäle" Grid.Row="6" />
+                                <Label Text="{Binding pLoggedChannelCount}" Grid.Row="6" Grid.Column="1"/>
 
-                            <Label Text="Erstellt" Grid.Row="7"/>
-                            <Label Text="{Binding pTimestamp}" Grid.Row="7" Grid.Column="1" />
+                                <Label Text="Erstellt" Grid.Row="7"/>
+                                <Label Text="{Binding pTimestamp}" Grid.Row="7" Grid.Column="1" />
 
-                            <Label Text="Intervall" Grid.Row="8" />
-                            <Label Text="{Binding pPeriod}" Grid.Row="8" Grid.Column="1" />
+                                <Label Text="Intervall" Grid.Row="8" />
+                                <Label Text="{Binding pPeriod}" Grid.Row="8" Grid.Column="1" />
 
-                            <Label Text="Aktiv" Grid.Row="9" VerticalOptions="Center"/>
-                            <Label Text="{Binding pActive}" Grid.Row="9" Grid.Column="1" />
-                            <!--<CheckBox IsChecked="{Binding pActive}" Grid.Row="9" Grid.Column="1" IsEnabled="False" HorizontalOptions="Start"/>-->
+                                <Label Text="Aktiv" Grid.Row="9" VerticalOptions="Center"/>
+                                <Label Text="{Binding pActive}" Grid.Row="9" Grid.Column="1" />
+                                <!--<CheckBox IsChecked="{Binding pActive}" Grid.Row="9" Grid.Column="1" IsEnabled="False" HorizontalOptions="Start"/>-->
 
-                        </Grid>
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 

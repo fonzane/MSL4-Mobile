@@ -7,6 +7,7 @@ public partial class ConnectionView : ContentPage
     private DeviceService deviceService;
     public List<Services.Device> devices { get; set; }
     public string ip { get; set; }
+    private bool hasConnected = false;
 
 	public ConnectionView()
 	{
@@ -29,6 +30,7 @@ public partial class ConnectionView : ContentPage
 
     async void OnConnectToMSL(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
     {
+        if (!hasConnected) hasConnected = true;
         if (e != null)
         {
             ip = (e.CurrentSelection.FirstOrDefault() as Services.Device).hostname;
@@ -42,6 +44,21 @@ public partial class ConnectionView : ContentPage
         else
         {
             MessagingCenter.Send<ConnectionView>(this, "isConnected");
+            // Get the current tab
+            //var currentTab = Shell.Current.CurrentItem;
+
+            //// Iterate through ShellContent pages in the current tab and reload them
+            //foreach (var shellContent in currentTab.Items)
+            //{
+            //    if (shellContent is ShellSection content)
+            //    {
+            //        // Get the route of the page associated with the ShellContent
+            //        var pageRoute = (string)content.Route;
+
+            //        // Reload the page by navigating to the same route
+            //        await Shell.Current.GoToAsync(pageRoute);
+            //    }
+            //}
             Console.WriteLine("Verbindungsherstellung erfolgreich");
             await Shell.Current.GoToAsync("//infoView");
         }

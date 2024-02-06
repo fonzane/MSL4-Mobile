@@ -41,9 +41,9 @@ public partial class DigitalView : ContentPage
 		OnPropertyChanged(nameof(digitalInputs));
 
 		if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
-			digitalInputsHeight = digitalInputs.Count * 60;
+			digitalInputsHeight = digitalInputs.Count * 60 + digitalInputs.Count * 10;
 		else
-			digitalInputsHeight = digitalInputs.Count * 90;
+			digitalInputsHeight = digitalInputs.Count * 90 + digitalInputs.Count * 10;
 		OnPropertyChanged(nameof(digitalInputsHeight));
         return;
 	}
@@ -57,9 +57,9 @@ public partial class DigitalView : ContentPage
 		OnPropertyChanged(nameof(digitalOutputs));
 
         if (DeviceInfo.Idiom == DeviceIdiom.Desktop)
-            digitalOutputsHeight = digitalOutputs.Count * 60;
+            digitalOutputsHeight = digitalOutputs.Count * 60 + digitalOutputs.Count * 10;
         else
-            digitalOutputsHeight = digitalOutputs.Count * 90;
+            digitalOutputsHeight = digitalOutputs.Count * 90 + digitalOutputs.Count * 10;
         OnPropertyChanged(nameof(digitalOutputsHeight));
         return;
 	}

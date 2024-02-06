@@ -10,7 +10,7 @@
         <ResourceDictionary>
             <Style x:Key="CollectionGridStyle" TargetType="Grid">
                 <Setter Property="ColumnDefinitions" Value="{OnIdiom '*,*,*,*', Phone='*,*'}" />
-                <Setter Property="RowDefinitions" Value="{OnIdiom auto, Phone='auto,auto,auto,auto'}" />
+                <Setter Property="RowDefinitions" Value="{OnIdiom 'auto', Phone='auto,auto,auto,auto'}" />
                 <!--<Setter Property="Padding" Value="10,0" />-->
             </Style>
             <Style x:Key="HorizontalStackStyle" TargetType="HorizontalStackLayout">
@@ -30,7 +30,7 @@
                 <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
             </CollectionView.ItemsLayout>
             <CollectionView.Header>
-                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*" RowSpacing="5">
+                <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="auto,auto,auto,auto" RowSpacing="5">
                     <Label Text="Gerät via IP suchen" Grid.ColumnSpan="2" VerticalOptions="Center"/>
                     <Entry Text="{Binding ip}" Placeholder="IP-Adresse" Grid.Column="2" Grid.ColumnSpan="2" />
                     <Button Text="Suchen" Grid.Row="1" Grid.ColumnSpan="4" Clicked="OnMSLConnect" />
@@ -45,29 +45,32 @@
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="services:Device">
-                    <Grid Style="{x:StaticResource CollectionGridStyle}" Margin="0, 5">
-                        <!--<Label Text="{Binding devicename}" Grid.Column="0"/>-->
-                        <HorizontalStackLayout Grid.Column="0" Style="{x:StaticResource HorizontalStackStyle}">
-                            <!--<Label Text="Name: " IsVisible="{OnIdiom false, Phone=true}"/>-->
-                            <Label Text="{Binding devicename}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Grid.Column="{OnIdiom 2,Phone=0}" Grid.Row="{OnIdiom Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
-                            <Label Text="{Binding street}" />
-                        </HorizontalStackLayout>
-                        <!--<Label Text="{Binding hostname}" Grid.Column="1"/>-->
-                        <HorizontalStackLayout Grid.Row="{OnIdiom Phone=2}" Style="{x:StaticResource HorizontalStackStyle}">
-                            <Label Text="IP: " IsVisible="{OnIdiom false, Phone=true}"/>
-                            <Label Text="{Binding hostname}" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=2}" Style="{x:StaticResource HorizontalStackStyle}">
-                            <Label Text="Online: " IsVisible="{OnIdiom false, Phone=true}"/>
-                            <Image Source="ballgreen" IsVisible="{Binding isOnline}" HeightRequest="24" Margin="0,-12,0,0"/>
-                            <Image Source="ballred" IsVisible="{Binding isOnline, Converter={services:InvertBool}}" HeightRequest="24" Margin="0,-12,0,0"/>
-                        </HorizontalStackLayout>
-                        <!--<Image Source="ballred" IsVisible="{Binding hasError}" HeightRequest="24" Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}"/>
-                        <Image Source="ballgreen" IsVisible="{Binding hasError, Converter={services:InvertBool}}" HeightRequest="24" Grid.Column="3"/>-->
-                    </Grid>
-
+                    <Border Stroke="#000000"
+                            StrokeThickness="2"
+                            Padding="2,0">
+                        <Grid Style="{x:StaticResource CollectionGridStyle}" Margin="0,5">
+                            <!--<Label Text="{Binding devicename}" Grid.Column="0"/>-->
+                            <HorizontalStackLayout Grid.Column="0" Style="{x:StaticResource HorizontalStackStyle}">
+                                <!--<Label Text="Name: " IsVisible="{OnIdiom false, Phone=true}"/>-->
+                                <Label Text="{Binding devicename}" FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="{OnIdiom 2,Phone=0}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                                <Label Text="{Binding street}" />
+                            </HorizontalStackLayout>
+                            <!--<Label Text="{Binding hostname}" Grid.Column="1"/>-->
+                            <HorizontalStackLayout Grid.Column="{OnIdiom 1, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}" Style="{x:StaticResource HorizontalStackStyle}">
+                                <Label Text="IP: " IsVisible="{OnIdiom false, Phone=true}"/>
+                                <Label Text="{Binding hostname}" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=2}" Style="{x:StaticResource HorizontalStackStyle}">
+                                <Label Text="Online: " IsVisible="{OnIdiom false, Phone=true}"/>
+                                <Image Source="ballgreen" IsVisible="{Binding isOnline}" HeightRequest="24" Margin="0,-12,0,0"/>
+                                <Image Source="ballred" IsVisible="{Binding isOnline, Converter={services:InvertBool}}" HeightRequest="24" Margin="0,-12,0,0"/>
+                            </HorizontalStackLayout>
+                            <!--<Image Source="ballred" IsVisible="{Binding hasError}" HeightRequest="24" Grid.Column="{OnIdiom 3, Phone=1}" Grid.Row="{OnIdiom 0, Phone=1}"/>
+                            <Image Source="ballgreen" IsVisible="{Binding hasError, Converter={services:InvertBool}}" HeightRequest="24" Grid.Column="3"/>-->
+                        </Grid>
+                    </Border>
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>

@@ -1,23 +1,35 @@
 ﻿<Properties StartupConfiguration="{2DC03E87-E421-48B1-ADD5-85683B6E8A2F}|Default">
-  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MyAppleMacCatalystID" />
-  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.95" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MSL4-Mobile/Views/Digital/DigitalView.xaml">
+    <Files>
+      <File FileName="MSL4-Mobile/Views/Digital/DigitalView.xaml" Line="79" Column="1" />
+      <File FileName="MSL4-Mobile/Views/Connection/ConnectionView.xaml" Line="49" Column="48" />
+      <File FileName="MSL4-Mobile/Views/Digital/DigitalView.xaml.cs" Line="82" Column="6" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="MSL4-Mobile" expanded="True">
-            <Node name="MSL4-Mobile" selected="True" />
+          <Node name="MSL4-Mobile">
+            <Node name="MSL4-Mobile">
+              <Node name="Views" expanded="True">
+                <Node name="Connection" expanded="True" />
+                <Node name="Digital">
+                  <Node name="DigitalView.xaml" expanded="True" selected="True" />
+                </Node>
+                <Node name="MBus" expanded="True" />
+                <Node name="Modbus" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <Debugger.DebugSourceFolders />
+  <MonoDevelop.Ide.ItemProperties.MSL4-Mobile PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.61C38ED0-7685-453F-B0E2-FC651DDF9F2F" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <Xamarin.Addins.Core.Project ActiveDebugTarget="MyAppleMacCatalystID" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.61C38ED0-7685-453F-B0E2-FC651DDF9F2F" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -15,10 +15,10 @@ public class AuthService
 	public static string ipaddress { get; set; } = "";
 	public static string auth_token { get; set; }
 	public static bool isConnected = false;
-	//public static string proxyURL = "http://localhost:3333/?maui=";
-    public static string proxyURL = "https://proxy.webmonitor.fw-systeme.de/?maui=";
-    //public static string webmonitorURL = "http://localhost:3000";
-    public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
+    public static string proxyURL = "http://localhost:3333/?maui=";
+    //public static string proxyURL = "https://proxy.webmonitor.fw-systeme.de/?maui=";
+    public static string webmonitorURL = "http://localhost:3000";
+    //public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
     public static string mslAddress;
 
 	static AuthService()
