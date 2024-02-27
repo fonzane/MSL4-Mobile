@@ -61,6 +61,10 @@
                 Title="Zähler"
                 ContentTemplate="{DataTemplate views:Meter.MeterView}" />
 
+            <ShellContent
+                Title="Chart"
+                ContentTemplate="{DataTemplate views:Chart.ChartView}" />
+
         </Tab>
 
         <Tab Title="Geräte" IsVisible="{Binding showNav}">

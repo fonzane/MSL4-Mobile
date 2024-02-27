@@ -70,6 +70,7 @@ public class MSL4Service
             {
                 string stringResponse = await response.Content.ReadAsStringAsync();
                 mSL4Data = JsonSerializer.Deserialize<MSL4Data>(stringResponse);
+                AuthService.dbDeviceID = mSL4Data.pDBDeviceID;
             }
             else
             {

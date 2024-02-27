@@ -96,6 +96,7 @@
 	  <None Remove="Resources\AppIcon\FW-App-Icon_152px.svg" />
 	  <None Remove="Resources\AppIcon\appiconfg.svg" />
 	  <None Remove="Resources\AppIcon\appicon.svg" />
+	  <None Remove="Views\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -112,6 +113,7 @@
 	  <Folder Include="Views\Home\" />
 	  <Folder Include="Views\Connection\" />
 	  <Folder Include="Views\Visual\" />
+	  <Folder Include="Views\Chart\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />

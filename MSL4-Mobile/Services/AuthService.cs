@@ -20,6 +20,7 @@ public class AuthService
     public static string webmonitorURL = "http://localhost:3000";
     //public static string webmonitorURL = "https://api.webmonitor.fw-systeme.de";
     public static string mslAddress;
+    public static int dbDeviceID;
 
 	static AuthService()
 	{
@@ -106,26 +107,6 @@ public class AuthService
             return false;
         }
     }
-
-	//private static void DecodeJWTAndPrint(string jwt)
-	//{
-
- //       jwt = jwt.Replace('_', '/').Replace('-', '+');
- //       string payload = jwt.Split(".")[1];
-
- //       switch (payload.Length % 4)
- //       {
- //           case 2: payload += "=="; break;
- //           case 3: payload += "="; break;
- //       }
- //       byte[] decoded = Convert.FromBase64String(payload);
- //       string decodedToken = System.Text.Encoding.Default.GetString(decoded);
- //       Console.WriteLine(decodedToken);
-
- //       JWTPayload jWTPayload = JsonSerializer.Deserialize<JWTPayload>(decodedToken);
- //       Console.WriteLine("Expiration: " + jWTPayload.exp);
- //       Console.WriteLine("Timestamp" + DateTimeOffset.UtcNow.ToUnixTimeSeconds());
- //   }
 
     public async static Task<bool> CheckLoggedIn()
     {
